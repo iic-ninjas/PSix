@@ -7,11 +7,20 @@ import com.activeandroid.annotation.Table;
 @Table(name = "Rsvps")
 public class Rsvp extends Model {
 
+    public enum RsvpStatus {
+        NOT_ATTENDING,
+        MAYBE,
+        ATTENDING
+    }
+
     @Column(name = "Id", unique = true, onUniqueConflict = Column.ConflictAction.FAIL)
     public String id;
 
     @Column(name = "Amount")
     public int amount;
+
+    @Column(name = "Status")
+    public RsvpStatus status;
 
     @Column(name = "Event")
     public Event event;
@@ -23,10 +32,11 @@ public class Rsvp extends Model {
         super();
     }
 
-    public Rsvp(String id, int amount, Event event, User user) {
+    public Rsvp(String id, int amount, RsvpStatus status, Event event, User user) {
         super();
         this.id = id;
         this.amount = amount;
+        this.status = status;
         this.event = event;
         this.user = user;
     }
