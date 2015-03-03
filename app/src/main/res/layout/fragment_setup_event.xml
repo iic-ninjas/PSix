@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:gravity="center"
+        android:weightSum="1.0"
+        >
+        <EditText
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:minHeight="50dp"
+            android:hint="@string/hint_setup_event_price"
+            android:inputType="number"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:background="@drawable/border"
+            android:ems="50"
+            android:id="@+id/editPaymentSum"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/label_setup_event_reason"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal" />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="100dp"
+        android:id="@+id/editPaymentReason"
+        android:background="@drawable/border"
+        android:gravity="top"
+        android:hint="@string/hint_setup_event_reason" />
+
+</LinearLayout>

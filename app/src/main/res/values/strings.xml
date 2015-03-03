@@ -3,5 +3,12 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
     <string name="title_activity_events">Your Events</string>
+    <string name="action_debug_setup_event">DBG: Setup Event</string>
+    <string name="label_setup_activity">Setup Event</string>
+    <string name="hint_setup_event_price">$99</string>
+    <string name="hint_setup_event_reason">The cost is to cover beer, chips and fruits for the party</string>
+    <string name="label_setup_event_reason">Why are you requesting money?</string>
+
 </resources>
