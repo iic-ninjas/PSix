@@ -18,19 +18,19 @@
             android:layout_height="wrap_content"
             android:layout_weight=".5"
             android:minHeight="50dp"
-            android:hint="$99"
+            android:hint="@string/hint_setup_event_price"
             android:inputType="number"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:background="@drawable/border"
             android:ems="50"
-            android:id="@+id/editText"/>
+            android:id="@+id/editPaymentSum"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Why are you requesting money?"
+        android:text="@string/label_setup_event_reason"
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal" />
 
@@ -39,9 +39,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="100dp"
-        android:id="@+id/editText2"
+        android:id="@+id/editPaymentReason"
         android:background="@drawable/border"
         android:gravity="top"
-        android:hint="The cost is to cover beer, chips and fruits for the party" />
+        android:hint="@string/hint_setup_event_reason" />
 
 </LinearLayout>
