@@ -12,8 +12,8 @@ public class ModelsTests extends DBTest {
 
         User user = Factories.createUser(fbUserId, name);
 
-        assertEquals(user.fbUserId, fbUserId);
-        assertEquals(user.name, name);
+        assertEquals(fbUserId, user.fbUserId);
+        assertEquals(name, user.name);
     }
 
     public void testEventCreation() throws Throwable {
@@ -35,12 +35,12 @@ public class ModelsTests extends DBTest {
         event.timestamp = timestamp;
         event.paymentDescription = description;
 
-        assertEquals(event.fbEventId, fbEventId);
-        assertEquals(event.name, name);
-        assertEquals(event.organizer, user);
-        assertEquals(event.shareURL, shareURL);
-        assertEquals(event.amountPerUser, amount);
-        assertEquals(event.timestamp, timestamp);
-        assertEquals(event.paymentDescription, description);
+        assertEquals(fbEventId, event.fbEventId);
+        assertEquals(name, event.name);
+        assertEquals(user, event.organizer);
+        assertEquals(shareURL, event.shareURL);
+        assertEquals(amount, event.amountPerUser);
+        assertEquals(timestamp, event.timestamp);
+        assertEquals(description, event.paymentDescription);
     }
 }
