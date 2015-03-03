@@ -16,16 +16,16 @@ public class Rsvp extends Model {
     @Column(name = "Id", unique = true, onUniqueConflict = Column.ConflictAction.FAIL)
     public String id;
 
-    @Column(name = "Amount")
+    @Column(name = "Amount", index = true)
     public int amount;
 
-    @Column(name = "Status")
+    @Column(name = "Status", index = true)
     public RsvpStatus status;
 
-    @Column(name = "Event")
+    @Column(name = "Event", index = true)
     public Event event;
 
-    @Column(name = "User")
+    @Column(name = "User", index = true)
     public User user;
 
     public Rsvp() {

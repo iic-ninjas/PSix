@@ -12,7 +12,7 @@ public class Event extends Model {
     @Column(name = "FbEventId", unique = true, onUniqueConflict = Column.ConflictAction.FAIL)
     public String fbEventId;
 
-    @Column(name = "Organizer")
+    @Column(name = "Organizer", index = true)
     public User organizer;
 
     @Column(name = "Name")
@@ -24,7 +24,7 @@ public class Event extends Model {
     @Column(name = "AmountPerUser")
     public int amountPerUser;
 
-    @Column(name = "Timestamp")
+    @Column(name = "Timestamp", index = true)
     public int timestamp;
 
     public List<Rsvp> rsvps() {
