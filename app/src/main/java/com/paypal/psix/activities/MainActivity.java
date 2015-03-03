@@ -36,11 +36,11 @@ public class MainActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }
-
-        if (id == R.id.action_debug_setup_event) {
+        } else if (id == R.id.action_debug_setup_event) {
             startActivity(new Intent(this, SetupEventActivity.class));
             return true;
+        } else if (id == R.id.action_debug_events_list) {
+            startActivity(new Intent(this, EventsActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

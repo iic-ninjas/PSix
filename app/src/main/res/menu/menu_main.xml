@@ -9,5 +9,9 @@
         android:title="@string/action_debug_setup_event"
         android:orderInCategory="200"
         app:showAsAction="never" />
+    <item android:id="@+id/action_debug_events_list"
+        android:title="@string/action_debug_events_list"
+        android:orderInCategory="300"
+        app:showAsAction="never" />
 
 </menu>
