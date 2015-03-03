@@ -35,6 +35,10 @@ public class Event extends Model {
         super();
     }
 
+    public Event(String name) {
+        this(null, null, name, null, 0, 0);
+    }
+
     public Event(String fbEventId, User organizer, String name, String shareURL, int amountPerUser, int timestamp) {
         super();
         this.fbEventId = fbEventId;
