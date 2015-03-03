@@ -34,4 +34,5 @@ dependencies {
     compile 'org.fluttercode.datafactory:datafactory:0.8'
     compile 'org.parceler:parceler-api:0.2.16-SNAPSHOT'
     provided 'org.parceler:parceler:0.2.16-SNAPSHOT'
+    compile 'com.facebook.android:facebook-android-sdk:3.21.1'
 }
