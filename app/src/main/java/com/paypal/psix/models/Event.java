@@ -4,11 +4,16 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import java.util.List;
+
 @Table(name = "Events")
 public class Event extends Model {
 
     @Column(name = "FbEventId", unique = true, onUniqueConflict = Column.ConflictAction.FAIL)
     public String fbEventId;
+
+    @Column(name = "Organizer")
+    public User organizer;
 
     @Column(name = "Name")
     public String name;
@@ -22,13 +27,18 @@ public class Event extends Model {
     @Column(name = "Timestamp")
     public int timestamp;
 
+    public List<Rsvp> rsvps() {
+        return getMany(Rsvp.class, "Event");
+    }
+
     public Event() {
         super();
     }
 
-    public Event(String fbEventId, String name, String shareURL, int amountPerUser, int timestamp) {
+    public Event(String fbEventId, User organizer, String name, String shareURL, int amountPerUser, int timestamp) {
         super();
         this.fbEventId = fbEventId;
+        this.organizer = organizer;
         this.name = name;
         this.amountPerUser = amountPerUser;
         this.shareURL = shareURL;

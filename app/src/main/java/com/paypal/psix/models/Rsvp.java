@@ -4,8 +4,8 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-@Table(name = "Payments")
-public class Payment extends Model {
+@Table(name = "Rsvps")
+public class Rsvp extends Model {
 
     @Column(name = "Id", unique = true, onUniqueConflict = Column.ConflictAction.FAIL)
     public String id;
@@ -13,13 +13,21 @@ public class Payment extends Model {
     @Column(name = "Amount")
     public int amount;
 
-    public Payment() {
+    @Column(name = "Event")
+    public Event event;
+
+    @Column(name = "User")
+    public User user;
+
+    public Rsvp() {
         super();
     }
 
-    public Payment(String id, int amount) {
+    public Rsvp(String id, int amount, Event event, User user) {
         super();
         this.id = id;
         this.amount = amount;
+        this.event = event;
+        this.user = user;
     }
 }

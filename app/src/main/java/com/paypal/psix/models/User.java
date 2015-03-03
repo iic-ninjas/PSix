@@ -4,6 +4,8 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import java.util.List;
+
 @Table(name = "Users")
 public class User extends Model {
 
@@ -12,6 +14,14 @@ public class User extends Model {
 
     @Column(name = "Name")
     public String name;
+
+    public List<Event> events() {
+        return getMany(Event.class, "Organizer");
+    }
+
+    public List<Rsvp> rsvps() {
+        return getMany(Rsvp.class, "User");
+    }
 
     public User() {
         super();
