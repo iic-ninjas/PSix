@@ -1,5 +1,6 @@
 package com.paypal.psix.activities;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +31,7 @@ public class ActivityWithSettings extends ActionBarActivity {
     }
 
     private void showSettings() {
-
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 }
