@@ -11,5 +11,9 @@
     <string name="hint_setup_event_reason">The cost is to cover beer, chips and fruits for the party</string>
     <string name="label_setup_event_reason">Why are you requesting money?</string>
     <string name="action_debug_events_list">DBG: Events List</string>
+    <string name="title_activity_onboarding">OnboardingActivity</string>
+    <string name="action_string_onboarding">Onboarding</string>
+    <string name="title_activity_hello">HelloActivity</string>
+    <string name="facebook_app_id">1582586055329685</string>
 
 </resources>
