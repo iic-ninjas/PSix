@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.paypal.psix.R;
+import com.paypal.psix.utils.EmailValidator;
 
 public class SettingsActivity extends PreferenceActivity
         implements Preference.OnPreferenceChangeListener {
@@ -42,13 +43,14 @@ public class SettingsActivity extends PreferenceActivity
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == paypalPref) {
-            return validatePaypalAccount();
+            return validatePaypalAccount(String.valueOf(newValue));
         }
         return true;
     }
 
     private void setupPaypalAccount() {
         paypalPref = findPreference(getString(R.string.pref_paypal_key));
+        paypalPref.setOnPreferenceChangeListener(this);
     }
 
     private void setupSignOut() {
@@ -62,8 +64,12 @@ public class SettingsActivity extends PreferenceActivity
         });
     }
 
-    private boolean validatePaypalAccount() {
-        return false;
+    private boolean validatePaypalAccount(String email) {
+        boolean isValid = EmailValidator.validate(email);
+        if (!isValid) {
+            Toast.makeText(SettingsActivity.this, getString(R.string.toast_invalid_email), Toast.LENGTH_LONG).show();
+        }
+        return isValid;
     }
 
     private void signOut() {
