@@ -8,7 +8,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:name="com.activeandroid.app.Application">
-
         <meta-data
             android:name="AA_DB_NAME"
             android:value="PSix.db" />
@@ -20,22 +19,21 @@
             android:value="com.paypal.psix.model.Event, com.paypal.psix.model.Rsvp, com.paypal.psix.model.User" />
 
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:name=".activities.EventsActivity"
+            android:label="@string/title_activity_events">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
-            android:name=".SetupEventActivity"
-            android:label="@string/label_setup_activity" >
-            android:parentActivityName=".MainActivity" >
+            android:name=".activities.SetupEventActivity"
+            android:label="@string/label_setup_activity"
+            android:parentActivityName=".activities.EventsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.paypal.psix.MainActivity" />
+                android:value=".activities.EventsActivity" />
         </activity>
 
     </application>

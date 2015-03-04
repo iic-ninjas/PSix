@@ -4,10 +4,15 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import org.parceler.Parcel;
+
 import java.util.List;
 
+@Parcel(value = Parcel.Serialization.BEAN, analysisLimit = Model.class)
 @Table(name = "Events")
 public class Event extends Model {
+
+    public static final String TAG = "Events";
 
     @Column(name = "FbEventId", unique = true, onUniqueConflict = Column.ConflictAction.FAIL)
     public String fbEventId;
@@ -36,6 +41,10 @@ public class Event extends Model {
 
     public Event() {
         super();
+    }
+
+    public Event(String name) {
+        this(null, null, name, null, 0, null, 0);
     }
 
     public Event(String fbEventId, User organizer, String name, String shareURL, int amountPerUser, String paymentDescription, int timestamp) {

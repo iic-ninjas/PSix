@@ -3,11 +3,12 @@
     android:id="@+id/setup_event_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.paypal.psix.SetupEventActivity"
+    tools:context="com.paypal.psix.activities.SetupEventActivity"
     tools:ignore="MergeRootFrame">
-    <fragment android:name="com.paypal.psix.SetupEventFragment"
+    <fragment android:name="com.paypal.psix.fragments.SetupEventFragment"
         android:id="@+id/setup_event"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_setup_event" />
 </FrameLayout>
 
