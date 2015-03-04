@@ -1,7 +1,7 @@
 package com.paypal.psix.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
 
 import com.paypal.psix.R;
 import com.paypal.psix.models.Event;
@@ -11,7 +11,7 @@ import org.parceler.Parcels;
 /**
  * Created by benny on 3/3/15.
  */
-public class SetupEventActivity extends ActionBarActivity {
+public class SetupEventActivity extends ActivityWithSettings {
 
     public Event event;
 
@@ -22,4 +22,9 @@ public class SetupEventActivity extends ActionBarActivity {
         setContentView(R.layout.activity_setup_event);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 }
