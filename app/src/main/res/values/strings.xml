@@ -11,6 +11,10 @@
     <string name="pref_paypal_title">Your PayPal Account</string>
     <string name="pref_paypal_key">paypal</string>
     <string name="pref_paypal_hint">account@gmail.com</string>
+    <string name="pref_paypal_summary">Receive payments to this account</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="pref_signout">Sign Out</string>
+    <string name="pref_signout_summary">Sign out from PSix</string>
+    <string name="pref_signout_key">signout</string>
 
 </resources>
