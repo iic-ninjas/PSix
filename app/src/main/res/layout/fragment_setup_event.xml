@@ -15,7 +15,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="PH: Event Name"
             android:layout_marginBottom="20dp"
-            android:id="@+id/eventName"
+            android:id="@+id/event_name_text_view"
             android:layout_gravity="center_horizontal" />
 
         <TextView
@@ -24,7 +24,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/label_setup_event_price"
             android:layout_marginBottom="30dp"
-            android:id="@+id/textView3"
             android:layout_gravity="center_horizontal" />
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -45,7 +44,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:background="@drawable/border"
                 android:ems="50"
-                android:id="@+id/editPaymentSum"/>
+                android:id="@+id/edit_payment_sum"/>
         </LinearLayout>
 
         <TextView
@@ -53,7 +52,6 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/label_setup_event_reason"
-            android:id="@+id/textView"
             android:layout_gravity="center_horizontal" />
 
 
@@ -61,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="100dp"
-            android:id="@+id/editPaymentReason"
+            android:id="@+id/edit_payment_reason"
             android:background="@drawable/border"
             android:gravity="top"
             android:hint="@string/hint_setup_event_reason" />
@@ -72,7 +70,7 @@
         android:layout_height="wrap_content"
         android:enabled="false"
         android:text="@string/button_create_payment_link"
-        android:id="@+id/buttonCreatePaymentLink"
+        android:id="@+id/button_create_paymentLink"
         android:layout_gravity="center_horizontal"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
