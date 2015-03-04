@@ -8,5 +8,9 @@
     <string name="hint_setup_event_price">$99</string>
     <string name="hint_setup_event_reason">The cost is to cover beer, chips and fruits for the party</string>
     <string name="label_setup_event_reason">Why are you requesting money?</string>
+    <string name="pref_paypal_title">Your PayPal Account</string>
+    <string name="pref_paypal_key">paypal</string>
+    <string name="pref_paypal_hint">account@gmail.com</string>
+    <string name="title_activity_settings">Settings</string>
 
 </resources>
