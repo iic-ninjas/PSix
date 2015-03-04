@@ -4,6 +4,9 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import org.parceler.Parcel;
+
+@Parcel(value = Parcel.Serialization.BEAN, analysisLimit = Model.class)
 @Table(name = "Rsvps")
 public class Rsvp extends Model {
 
@@ -13,8 +16,8 @@ public class Rsvp extends Model {
         ATTENDING
     }
 
-    @Column(name = "Id", unique = true, onUniqueConflict = Column.ConflictAction.FAIL)
-    public String id;
+    @Column(name = "RemoteId", unique = true, onUniqueConflict = Column.ConflictAction.FAIL)
+    public String remoteId;
 
     @Column(name = "Amount", index = true)
     public int amount;
@@ -32,9 +35,9 @@ public class Rsvp extends Model {
         super();
     }
 
-    public Rsvp(String id, int amount, RsvpStatus status, Event event, User user) {
+    public Rsvp(String remoteId, int amount, RsvpStatus status, Event event, User user) {
         super();
-        this.id = id;
+        this.remoteId = remoteId;
         this.amount = amount;
         this.status = status;
         this.event = event;

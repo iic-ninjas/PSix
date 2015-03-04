@@ -1,4 +1,4 @@
-package com.paypal.psix;
+package com.paypal.psix.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.paypal.psix.R;
 
 /**
  * Created by benny on 3/3/15.
