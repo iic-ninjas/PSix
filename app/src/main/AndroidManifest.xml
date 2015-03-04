@@ -16,7 +16,7 @@
             android:value="1" />
         <meta-data
             android:name="AA_MODELS"
-            android:value="com.paypal.psix.model.Event, com.paypal.psix.model.Rsvp, com.paypal.psix.model.User" />
+            android:value="com.paypal.psix.models.Event, com.paypal.psix.models.Rsvp, com.paypal.psix.models.User" />
 
 
         <activity
