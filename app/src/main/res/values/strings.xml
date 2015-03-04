@@ -18,4 +18,5 @@
     <string name="pref_paypal_key">paypal</string>
     <string name="pref_paypal_hint">account@gmail.com</string>
     <string name="pref_paypal_summary">Receive payments to this account</string>
+    <string name="toast_sign_out">Signed Out</string>
 </resources>

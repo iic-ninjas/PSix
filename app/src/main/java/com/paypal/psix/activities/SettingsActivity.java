@@ -7,11 +7,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.paypal.psix.R;
 
 public class SettingsActivity extends PreferenceActivity
         implements Preference.OnPreferenceChangeListener {
+
+    Preference paypalPref;
+    Preference signOutPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -19,6 +23,7 @@ public class SettingsActivity extends PreferenceActivity
         addPreferencesFromResource(R.xml.pref_general);
 
         setupToolbar();
+        setupPaypalAccount();
         setupSignOut();
     }
 
@@ -36,18 +41,33 @@ public class SettingsActivity extends PreferenceActivity
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == paypalPref) {
+            return validatePaypalAccount();
+        }
         return true;
     }
 
+    private void setupPaypalAccount() {
+        paypalPref = findPreference(getString(R.string.pref_paypal_key));
+    }
+
     private void setupSignOut() {
-        Preference button = findPreference(getString(R.string.pref_signout_key));
-        button.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        signOutPref = findPreference(getString(R.string.pref_signout_key));
+        signOutPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
-            public boolean onPreferenceClick(Preference arg0) {
-                // Sign out code.
+            public boolean onPreferenceClick(Preference pref) {
+                signOut();
                 return true;
             }
         });
+    }
+
+    private boolean validatePaypalAccount() {
+        return false;
+    }
+
+    private void signOut() {
+        Toast.makeText(SettingsActivity.this, getString(R.string.toast_sign_out), Toast.LENGTH_SHORT).show();
     }
 
 }
