@@ -10,7 +10,7 @@ import com.paypal.psix.R;
 /**
  * Created by shay on 3/4/15.
  */
-public class ActivityWithSettings extends ActionBarActivity {
+public class PSixActionBarActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -25,6 +25,9 @@ public class ActivityWithSettings extends ActionBarActivity {
         if (id == R.id.action_settings) {
             showSettings();
             return true;
+        } else if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -33,5 +36,6 @@ public class ActivityWithSettings extends ActionBarActivity {
     private void showSettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }
