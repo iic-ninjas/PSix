@@ -36,8 +36,15 @@ public class SettingsActivity extends PreferenceActivity
             @Override
             public void onClick(View v) {
                 finish();
+                fadeOutSettings();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        fadeOutSettings();
     }
 
     @Override
@@ -74,6 +81,10 @@ public class SettingsActivity extends PreferenceActivity
 
     private void signOut() {
         Toast.makeText(SettingsActivity.this, getString(R.string.toast_sign_out), Toast.LENGTH_SHORT).show();
+    }
+
+    private void fadeOutSettings() {
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
 }

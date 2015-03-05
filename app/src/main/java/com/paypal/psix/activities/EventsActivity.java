@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.paypal.psix.R;
 
-public class EventsActivity extends ActivityWithSettings {
+public class EventsActivity extends PSixActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
