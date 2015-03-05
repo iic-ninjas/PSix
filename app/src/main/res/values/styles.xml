@@ -9,6 +9,12 @@
 
     <style name="PSixTheme" parent="@style/Theme.AppCompat">
         <item name="android:windowAnimationStyle">@style/SlideActivityAnimation</item>
+        <item name="actionBarStyle">@style/CustomBarStyle</item>
+    </style>
+
+    <style name="CustomBarStyle"
+        parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="background">@color/main_color</item>
     </style>
 
 </resources>
