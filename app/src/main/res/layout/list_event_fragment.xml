@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/event_item_desc"
-            android:text="Attending" />
+            android:text="Event description" />
     </LinearLayout>
 
     <LinearLayout
@@ -46,11 +46,14 @@
         android:layout_weight="2">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Date"
-            android:id="@+id/event_item_date" />
+            android:id="@+id/event_item_date"
+            android:layout_marginTop="4px"
+            android:layout_marginRight="7px" />
     </LinearLayout>
 
 </LinearLayout>
