@@ -7,4 +7,8 @@
         <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
     ֿ</style>
 
+    <style name="PSixTheme" parent="@style/Theme.AppCompat">
+        <item name="android:windowAnimationStyle">@style/SlideActivityAnimation</item>
+    </style>
+
 </resources>
