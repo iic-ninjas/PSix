@@ -21,5 +21,4 @@ public class SetupEventActivity extends ActionBarActivity {
         event = Parcels.unwrap(getIntent().getExtras().getParcelable(Event.TAG));
         setContentView(R.layout.activity_setup_event);
     }
-
 }
