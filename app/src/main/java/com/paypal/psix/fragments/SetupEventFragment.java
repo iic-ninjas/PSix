@@ -1,15 +1,16 @@
 package com.paypal.psix.fragments;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import com.paypal.psix.R;
 
@@ -26,6 +27,7 @@ public class SetupEventFragment extends Fragment {
     @InjectView(R.id.edit_payment_sum) EditText paymentSumText;
     @InjectView(R.id.edit_payment_reason) EditText paymentReasonText;
     @InjectView(R.id.button_create_paymentLink) Button createPaymentLink;
+    @InjectView(R.id.setup_event_progress_bar_container) RelativeLayout progressBarContainer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,22 +65,12 @@ public class SetupEventFragment extends Fragment {
     //endregion
 
     class CreatePaymentLinkTask extends AsyncTask<Void, Void, Void> {
-        private ProgressDialog progressDialog;
-
-        private void showProgressDialog(){
-            progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setTitle("Processing...");
-            progressDialog.setMessage("Please wait.");
-            progressDialog.setCancelable(true);
-            progressDialog.setIndeterminate(true);
-            progressDialog.show();
-        }
-
 
         @Override
         protected void onPreExecute() {
-            showProgressDialog();
-
+            createPaymentLink.setFocusableInTouchMode(true);
+            createPaymentLink.requestFocus();
+            progressBarContainer.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -94,9 +86,8 @@ public class SetupEventFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void result) {
-            if (progressDialog!=null) {
-                progressDialog.dismiss();
-            }
+            createPaymentLink.setFocusableInTouchMode(false);
+            progressBarContainer.setVisibility(View.GONE);
         }
     };
 }
