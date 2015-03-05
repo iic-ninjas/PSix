@@ -53,7 +53,7 @@ public class EventsAdapter extends ArrayAdapter<Event> {
 
         holder.titleLabel.setText(event.name);
         holder.dateLabel.setText(event.getFormattedDate());
-        Picasso.with(getContext()).load("http://lorempixel.com/200/" + (200 + position) + "/").into(holder.imageView);
+        Picasso.with(getContext()).load(event.imageURL).into(holder.imageView);
 
         return view;
     }
