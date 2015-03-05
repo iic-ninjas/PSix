@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.paypal.psix.R;
 import com.paypal.psix.models.Event;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ import butterknife.InjectView;
 public class EventsAdapter extends ArrayAdapter<Event> {
 
     static class ViewHolder {
-        @InjectView(R.id.event_image) ImageView image;
+        @InjectView(R.id.event_image) ImageView imageView;
         @InjectView(R.id.event_name) TextView label;
 
         public ViewHolder(View view) {
@@ -49,6 +50,7 @@ public class EventsAdapter extends ArrayAdapter<Event> {
         }
 
         holder.label.setText(event.name);
+        Picasso.with(getContext()).load("http://lorempixel.com/200/" + (200 + position) + "/").into(holder.imageView);
 
         return view;
     }
