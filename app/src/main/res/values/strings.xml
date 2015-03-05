@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PSix</string>
+    <string name="app_name">P⁶</string>
 
     <string name="label_setup_activity">Setup Event</string>
     <string name="hint_setup_event_price">$99</string>

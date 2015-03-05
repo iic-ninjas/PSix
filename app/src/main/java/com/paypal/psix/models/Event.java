@@ -4,8 +4,11 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import org.fluttercode.datafactory.impl.DataFactory;
 import org.parceler.Parcel;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Parcel(value = Parcel.Serialization.BEAN, analysisLimit = Model.class)
@@ -47,6 +50,14 @@ public class Event extends Model {
         this(null, null, name, null, 0, null, 0);
     }
 
+    public static Event GenerateRandomEvent() {
+        DataFactory df = new DataFactory();
+        Event event = new Event();
+        event.name = df.getRandomWord() + " " + df.getRandomWord() + " " + df.getRandomWord();
+        event.timestamp = df.getDate(new Date(), 0, 20).getTime();
+        return event;
+    }
+
     public Event(String fbEventId, User organizer, String name, String shareURL, int amountPerUser, String paymentDescription, int timestamp) {
         super();
         this.fbEventId = fbEventId;
@@ -56,5 +67,14 @@ public class Event extends Model {
         this.paymentDescription = paymentDescription;
         this.shareURL = shareURL;
         this.timestamp = timestamp;
+    }
+
+    public Date getDate() {
+        return new Date(timestamp);
+    }
+
+    public String getFormattedDate() {
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/mm/yy");
+        return fmt.format(getDate());
     }
 }
