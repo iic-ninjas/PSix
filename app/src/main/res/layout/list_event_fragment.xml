@@ -1,66 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/container_dropshadow"
-    android:orientation="horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:minHeight="?android:attr/listPreferredItemHeight"
-    android:padding="10dp"
     android:clipChildren="false">
 
-    <RelativeLayout
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+
+    <LinearLayout
+        android:background="@drawable/container_dropshadow"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:padding="10dp"
         android:clipChildren="false">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:id="@+id/event_item_image"
-            android:background="@color/color_light"
-            android:scaleType="centerCrop"
-            android:clipChildren="false"/>
+            android:background="@drawable/border"
+            android:scaleType="fitXY"
+            android:clipChildren="false"
+            android:padding="1dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Date"
-            android:id="@+id/event_item_date"
-            android:singleLine="true"
-            android:textAlignment="center"
-            android:background="@drawable/rounded"
-            android:elevation="2dp"
-            android:autoText="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="2dp" />
-    </RelativeLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="12dp">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginLeft="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/event_item_title"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Test"
+                android:layout_marginTop="2dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/event_item_title"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="Test" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/event_item_desc"
+                android:text="Event description" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/event_item_desc"
-            android:text="Event description" />
     </LinearLayout>
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Date"
+        android:id="@+id/event_item_date"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:background="@drawable/rounded"
+        android:elevation="2dp"
+        android:autoText="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="2dp" />
+
+</RelativeLayout>
