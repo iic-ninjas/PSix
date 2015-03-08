@@ -20,4 +20,5 @@
     <string name="pref_paypal_summary">Receive payments to this account</string>
     <string name="toast_sign_out">Signed Out</string>
     <string name="toast_invalid_email">Please enter a valid email account</string>
+    <string name="your_events">Your Events</string>
 </resources>
