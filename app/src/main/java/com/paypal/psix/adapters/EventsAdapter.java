@@ -23,6 +23,9 @@ import butterknife.InjectView;
 public class EventsAdapter extends ArrayAdapter<Event> {
 
     static class ViewHolder {
+        public static int BASE_ROTATION = -10;
+        public static int MAX_ROTATION = 5;
+
         @InjectView(R.id.event_item_image) ImageView imageView;
         @InjectView(R.id.event_item_title) TextView titleLabel;
         @InjectView(R.id.event_item_date) TextView dateLabel;
@@ -30,6 +33,7 @@ public class EventsAdapter extends ArrayAdapter<Event> {
 
         public ViewHolder(View view) {
             ButterKnife.inject(this, view);
+            dateLabel.setRotation(BASE_ROTATION + (float)((int)(Math.random() * 2 * MAX_ROTATION) - MAX_ROTATION));
         }
     }
 

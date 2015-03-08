@@ -85,7 +85,7 @@ public class Event extends Model {
     }
 
     public String getFormattedDate() {
-        SimpleDateFormat fmt = new SimpleDateFormat("dd/mm/yy");
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM");
         return fmt.format(getDate());
     }
 }
