@@ -68,7 +68,7 @@ public class EventsFragment extends Fragment {
         Event[] array = {
                 Event.GenerateRandomEvent(), Event.GenerateRandomEvent().setup(), Event.GenerateRandomEvent(),
                 Event.GenerateRandomEvent(), Event.GenerateRandomEvent(), Event.GenerateRandomEvent(),
-                Event.GenerateRandomEvent(), Event.GenerateRandomEvent(), Event.GenerateRandomEvent(),
+                Event.GenerateRandomEvent(), Event.GenerateRandomEvent().setup(), Event.GenerateRandomEvent(),
                 Event.GenerateRandomEvent(), Event.GenerateRandomEvent(), Event.GenerateRandomEvent()
         };
 
@@ -76,7 +76,13 @@ public class EventsFragment extends Fragment {
 
         Collections.sort(arrayList, new Comparator<Event>() {
             public int compare(Event e1, Event e2) {
-                return e1.timestamp > e2.timestamp ? 1 : -1;
+                if (e1.hasSetup && e2.hasSetup || !e1.hasSetup && !e2.hasSetup) {
+                    return (e1.timestamp > e2.timestamp) ? 1 : -1;
+                } else if (!e1.hasSetup && e2.hasSetup) {
+                    return 1;
+                } else if (e1.hasSetup && !e2.hasSetup) {
+                    return -1;
+                } else return (e1.timestamp > e2.timestamp) ? 1 : -1;
             }
         });
 
