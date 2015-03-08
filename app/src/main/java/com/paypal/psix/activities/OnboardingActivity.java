@@ -1,7 +1,7 @@
 package com.paypal.psix.activities;
 
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 import com.facebook.Session;
@@ -10,7 +10,6 @@ import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 import com.paypal.psix.R;
-import com.paypal.psix.fragments.OnboardingFragment;
 
 
 public class OnboardingActivity extends FragmentActivity {
@@ -35,7 +34,9 @@ public class OnboardingActivity extends FragmentActivity {
         setContentView(R.layout.activity_onboarding);
 
         loginButton = (LoginButton) findViewById(R.id.fb_login_button);
+        loginButton.setReadPermissions("public_profile", "user_events");
         loginButton.setUserInfoChangedCallback(new LoginButton.UserInfoChangedCallback() {
+
             @Override
             public void onUserInfoFetched(GraphUser graphUser) {
                 Log.i(LOG_TAG, "user info fetched");
@@ -44,6 +45,18 @@ public class OnboardingActivity extends FragmentActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        uiHelper.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        uiHelper.onPause();
     }
 
     private void onSessionStateChange(Session session, SessionState state, Exception e) {}
