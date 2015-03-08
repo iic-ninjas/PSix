@@ -38,11 +38,16 @@ public class UserSession {
     }
 
     public User getUser() {
-        return new User(
-                getSharedPrefs().getString(CUR_USER_FBID_KEY, null),
-                getSharedPrefs().getString(CUR_USER_FIRST_NAME_KEY, null),
-                getSharedPrefs().getString(CUR_USER_LAST_NAME_KEY, null)
-        );
+        String fbId = getSharedPrefs().getString(CUR_USER_FBID_KEY, null);
+        if (fbId != null) {
+            return new User(
+                    fbId,
+                    getSharedPrefs().getString(CUR_USER_FIRST_NAME_KEY, null),
+                    getSharedPrefs().getString(CUR_USER_LAST_NAME_KEY, null)
+            );
+        }
+
+        return null;
     }
 
     public static void setUser(GraphUser newUser) {
