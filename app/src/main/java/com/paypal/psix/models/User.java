@@ -15,8 +15,11 @@ public class User extends Model {
     @Column(name = "FbUserId", unique = true, onUniqueConflict = Column.ConflictAction.FAIL)
     public String fbUserId;
 
-    @Column(name = "Name")
-    public String name;
+    @Column(name = "FirstName")
+    public String firstName;
+
+    @Column(name = "LastName")
+    public String lastName;
 
     public List<Event> events() {
         return getMany(Event.class, "Organizer");
@@ -30,9 +33,10 @@ public class User extends Model {
         super();
     }
 
-    public User(String fbUserId, String name) {
+    public User(String fbUserId, String firstName, String lastName) {
         super();
         this.fbUserId = fbUserId;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 }
