@@ -4,9 +4,6 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-import org.parceler.Parcel;
-
-@Parcel(value = Parcel.Serialization.BEAN, analysisLimit = Model.class)
 @Table(name = "Rsvps")
 public class Rsvp extends Model {
 

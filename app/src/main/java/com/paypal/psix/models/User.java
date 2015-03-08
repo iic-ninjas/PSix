@@ -4,11 +4,8 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-import org.parceler.Parcel;
-
 import java.util.List;
 
-@Parcel(value = Parcel.Serialization.BEAN, analysisLimit = Model.class)
 @Table(name = "Users")
 public class User extends Model {
 
