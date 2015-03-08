@@ -3,15 +3,14 @@ package com.paypal.psix.models;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 
 import org.fluttercode.datafactory.impl.DataFactory;
-import org.parceler.Parcel;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@Parcel(value = Parcel.Serialization.BEAN, analysisLimit = Model.class)
 @Table(name = "Events")
 public class Event extends Model {
 
@@ -58,6 +57,7 @@ public class Event extends Model {
         event.name = df.getRandomWord() + " " + df.getRandomWord() + " " + df.getRandomWord();
         event.imageURL = "http://lorempixel.com/200/" + (200 + df.getNumberBetween(0, 100)) + "/";
         event.timestamp = df.getDate(new Date(), 0, 20).getTime();
+        event.save();
         return event;
     }
 
@@ -87,5 +87,9 @@ public class Event extends Model {
     public String getFormattedDate() {
         SimpleDateFormat fmt = new SimpleDateFormat("dd/MM");
         return fmt.format(getDate());
+    }
+
+    public static Event find(long id) {
+        return new Select().from(Event.class).where("id = ?", id).executeSingle();
     }
 }

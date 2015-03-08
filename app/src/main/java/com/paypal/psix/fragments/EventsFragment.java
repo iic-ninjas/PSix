@@ -15,8 +15,6 @@ import com.paypal.psix.activities.SetupEventActivity;
 import com.paypal.psix.adapters.EventsAdapter;
 import com.paypal.psix.models.Event;
 
-import org.parceler.Parcels;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -61,7 +59,7 @@ public class EventsFragment extends Fragment {
     private void navigateToEvent(Event event) {
         Class<?> klass = event.hasSetup ? EventStatusActivity.class : SetupEventActivity.class;
         Intent intent = new Intent(getActivity(), klass);
-        intent.putExtra(Event.TAG, Parcels.wrap(event));
+        intent.putExtra(Event.TAG, event.getId());
         startActivity(intent);
     }
 
