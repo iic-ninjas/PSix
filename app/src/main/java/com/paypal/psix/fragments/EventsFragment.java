@@ -65,7 +65,7 @@ public class EventsFragment extends Fragment {
     private ArrayList<Event> eventsDataSource() {
         // Demo data.
         Event[] array = {
-                Event.GenerateRandomEvent(), Event.GenerateRandomEvent(), Event.GenerateRandomEvent(),
+                Event.GenerateRandomEvent(), Event.GenerateRandomEvent().setup(), Event.GenerateRandomEvent(),
                 Event.GenerateRandomEvent(), Event.GenerateRandomEvent(), Event.GenerateRandomEvent(),
                 Event.GenerateRandomEvent(), Event.GenerateRandomEvent(), Event.GenerateRandomEvent(),
                 Event.GenerateRandomEvent(), Event.GenerateRandomEvent(), Event.GenerateRandomEvent()
