@@ -21,9 +21,9 @@ android {
 
 repositories {
     mavenCentral()
-    maven {
-        url "https://oss.sonatype.org/content/repositories/snapshots/"
-    }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url 'https://github.com/MarsVard/IonIconView/raw/master/maven' }
+
 }
 
 dependencies {
@@ -36,4 +36,5 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:3.21.1'
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.squareup.picasso:picasso:2.5.0'
+    compile 'be.webelite:ion-iconview:1.0.+@aar'
 }
