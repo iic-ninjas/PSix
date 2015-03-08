@@ -21,4 +21,7 @@
     <string name="toast_sign_out">Signed Out</string>
     <string name="toast_invalid_email">Please enter a valid email account</string>
     <string name="your_events">Your Events</string>
+    <string name="title_activity_event_status">EventStatusActivity</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

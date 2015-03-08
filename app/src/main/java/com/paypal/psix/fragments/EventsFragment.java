@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.paypal.psix.R;
+import com.paypal.psix.activities.EventStatusActivity;
 import com.paypal.psix.activities.SetupEventActivity;
 import com.paypal.psix.adapters.EventsAdapter;
 import com.paypal.psix.models.Event;
@@ -45,12 +46,8 @@ public class EventsFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Event event = (Event)adapterView.getItemAtPosition(position);
-                if (event != null) {
-                    Intent intent = new Intent(getActivity(), SetupEventActivity.class);
-                    intent.putExtra(Event.TAG, Parcels.wrap(event));
-                    startActivity(intent);
-                }
+                Event event = (Event) adapterView.getItemAtPosition(position);
+                if (event != null) navigateToEvent(event);
             }
         });
 
@@ -60,6 +57,13 @@ public class EventsFragment extends Fragment {
     @Override public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+    }
+
+    private void navigateToEvent(Event event) {
+        Class<?> klass = event.hasSetup ? EventStatusActivity.class : SetupEventActivity.class;
+        Intent intent = new Intent(getActivity(), klass);
+        intent.putExtra(Event.TAG, Parcels.wrap(event));
+        startActivity(intent);
     }
 
     private ArrayList<Event> eventsDataSource() {
