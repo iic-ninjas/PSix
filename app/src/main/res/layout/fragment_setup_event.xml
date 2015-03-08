@@ -1,69 +1,65 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:layout_alignParentTop="true"
+    android:background="@drawable/container_dropshadow">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="PH: Event Name"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/event_name_text_view"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/label_setup_event_price"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="center_horizontal" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        android:layout_alignParentTop="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="PH: Event Name"
-            android:layout_marginBottom="20dp"
-            android:id="@+id/event_name_text_view"
-            android:layout_gravity="center_horizontal" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/label_setup_event_price"
-            android:layout_marginBottom="30dp"
-            android:layout_gravity="center_horizontal" />
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
-            android:gravity="center"
-            android:weightSum="1.0"
-            >
-            <EditText
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:minHeight="50dp"
-                android:hint="@string/hint_setup_event_price"
-                android:inputType="number"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:background="@drawable/border"
-                android:ems="50"
-                android:id="@+id/edit_payment_sum"/>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/label_setup_event_reason"
-            android:layout_gravity="center_horizontal" />
-
-
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:weightSum="1.0"
+        >
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:minHeight="100dp"
-            android:id="@+id/edit_payment_reason"
+            android:layout_weight=".5"
+            android:minHeight="50dp"
+            android:hint="@string/hint_setup_event_price"
+            android:inputType="number"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:background="@drawable/border"
-            android:gravity="top"
-            android:hint="@string/hint_setup_event_reason" />
+            android:ems="50"
+            android:id="@+id/edit_payment_sum"/>
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/label_setup_event_reason"
+        android:layout_gravity="center_horizontal" />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="100dp"
+        android:id="@+id/edit_payment_reason"
+        android:background="@drawable/border"
+        android:gravity="top"
+        android:hint="@string/hint_setup_event_reason" />
 
     <Button
         android:layout_width="wrap_content"
@@ -76,20 +72,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp" />
 
-    <com.paypal.psix.ModalRelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/setup_event_progress_bar_container"
-        android:visibility="gone"
-        android:focusableInTouchMode="true"
-        android:background="@color/color_light_with_alpha" >
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/setup_event_progress_bar"
-            style="@android:style/Widget.ProgressBar.Large.Inverse"
-            android:layout_centerInParent="true"
-            />
-    </com.paypal.psix.ModalRelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>
+

@@ -15,7 +15,6 @@ import java.util.Arrays;
 
 public class OnboardingFragment extends Fragment {
 
-
     private static final String TAG = "MainFragment";
 
     @Override
