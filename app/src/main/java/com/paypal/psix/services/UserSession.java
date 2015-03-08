@@ -45,37 +45,11 @@ public class UserSession {
         );
     }
 
+    public static void setUser(GraphUser newUser) {
+        new UserSession(new User(newUser.getId(), newUser.getFirstName(), newUser.getLastName()));
+    }
 
     private static UserSession sessionInstance;
-
-    public static Task<User> connectWithFacebook(Session session) {
-        Log.i(LOG_TAG, "Starting connection with facebook");
-        final Task<User>.TaskCompletionSource taskCompletionSource = Task.create();
-
-        Request.newMeRequest(session, new Request.GraphUserCallback() {
-            @Override
-            public void onCompleted(GraphUser graphUser, Response response) {
-                Log.i(LOG_TAG, "Connection to facebook completed");
-                Log.i(LOG_TAG, "User is: " + graphUser.getFirstName());
-                if (response.getError() != null) {
-                    taskCompletionSource.setError(new UserSessionException(response.getError()));
-                    return;
-                }
-
-                User user = new User(graphUser.getId(), graphUser.getFirstName(), graphUser.getLastName());
-                new UserSession(user);
-
-                taskCompletionSource.setResult(user);
-            }
-        }).executeAsync();
-
-        return taskCompletionSource.getTask();
-    }
-
-    public static UserSession getCurrentSession() {
-        return sessionInstance;
-    }
-
 
     public static class UserSessionException extends Exception {
 
