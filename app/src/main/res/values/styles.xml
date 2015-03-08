@@ -7,8 +7,14 @@
         <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
     ֿ</style>
 
-    <style name="PSixTheme" parent="@style/Theme.AppCompat">
+    <style name="PSixTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowAnimationStyle">@style/SlideActivityAnimation</item>
+        <item name="actionBarStyle">@style/CustomBarStyle</item>
+    </style>
+
+    <style name="CustomBarStyle"
+        parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="background">@color/main_color</item>
     </style>
 
 </resources>

@@ -18,6 +18,8 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -38,19 +40,8 @@ public class EventsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_events, container, false);
         ButterKnife.inject(this, rootView);
 
-        // Demo data.
-        Event[] array = {
-            new Event("Event 1"),
-            new Event("Event 2"),
-            new Event("Event 3"),
-            new Event("Event 4"),
-            new Event("Event 5"),
-            new Event("Event 6"),
-            new Event("Event 7"),
-            new Event("Event 8"),
-            new Event("Event 9")
-        };
-        listView.setAdapter(new EventsAdapter(getActivity(), new ArrayList<>(Arrays.asList(array))));
+
+        listView.setAdapter(new EventsAdapter(getActivity(), eventsDataSource()));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -69,5 +60,26 @@ public class EventsFragment extends Fragment {
     @Override public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+    }
+
+    private ArrayList<Event> eventsDataSource() {
+        // Demo data.
+        Event[] array = {
+                Event.GenerateRandomEvent(), Event.GenerateRandomEvent(), Event.GenerateRandomEvent(),
+                Event.GenerateRandomEvent(), Event.GenerateRandomEvent(), Event.GenerateRandomEvent(),
+                Event.GenerateRandomEvent(), Event.GenerateRandomEvent(), Event.GenerateRandomEvent(),
+                Event.GenerateRandomEvent(), Event.GenerateRandomEvent(), Event.GenerateRandomEvent()
+        };
+
+        ArrayList<Event> arrayList = new ArrayList<>(Arrays.asList(array));
+
+        Collections.sort(arrayList, new Comparator<Event>() {
+            public int compare(Event e1, Event e2) {
+                return e1.timestamp > e2.timestamp ? 1 : -1;
+            }
+        });
+
+        return arrayList;
+
     }
 }
