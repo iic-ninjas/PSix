@@ -23,7 +23,7 @@ import butterknife.InjectView;
 public class EventsAdapter extends ArrayAdapter<Event> {
 
     static class ViewHolder {
-        public static int BASE_ROTATION = -14;
+        public static int BASE_ROTATION = -12;
         public static int MAX_ROTATION = 10;
 
         @InjectView(R.id.event_item_image) ImageView imageView;
