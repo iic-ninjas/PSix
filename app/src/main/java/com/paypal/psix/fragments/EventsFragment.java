@@ -41,7 +41,6 @@ public class EventsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_events, container, false);
         ButterKnife.inject(this, rootView);
 
-
         listView.setAdapter(new EventsAdapter(getActivity(), eventsDataSource()));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
