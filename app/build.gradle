@@ -37,6 +37,4 @@ dependencies {
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.facebook.android:facebook-android-sdk:3.21.1'
     compile 'com.squareup.picasso:picasso:2.5.0'
-    compile 'se.emilsjolander:stickylistheaders:2.5.2'
-
 }
