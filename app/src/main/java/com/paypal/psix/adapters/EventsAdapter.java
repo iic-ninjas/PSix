@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.paypal.psix.R;
 import com.paypal.psix.models.Event;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -22,11 +23,17 @@ import butterknife.InjectView;
 public class EventsAdapter extends ArrayAdapter<Event> {
 
     static class ViewHolder {
-        @InjectView(R.id.event_image) ImageView image;
-        @InjectView(R.id.event_name) TextView label;
+        public static int BASE_ROTATION = -12;
+        public static int MAX_ROTATION = 10;
+
+        @InjectView(R.id.event_item_image) ImageView imageView;
+        @InjectView(R.id.event_item_title) TextView titleLabel;
+        @InjectView(R.id.event_item_date) TextView dateLabel;
+        @InjectView(R.id.event_item_desc) TextView descLabel;
 
         public ViewHolder(View view) {
             ButterKnife.inject(this, view);
+            dateLabel.setRotation(BASE_ROTATION + (float)((int)(Math.random() * 2 * MAX_ROTATION) - MAX_ROTATION));
         }
     }
 
@@ -48,7 +55,9 @@ public class EventsAdapter extends ArrayAdapter<Event> {
             view.setTag(holder);
         }
 
-        holder.label.setText(event.name);
+        holder.titleLabel.setText(event.name);
+        holder.dateLabel.setText(event.getFormattedDate());
+        Picasso.with(getContext()).load(event.imageURL).into(holder.imageView);
 
         return view;
     }

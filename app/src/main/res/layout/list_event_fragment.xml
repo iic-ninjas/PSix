@@ -1,19 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
     android:minHeight="?android:attr/listPreferredItemHeight">
 
-    <ImageView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/event_image"
-        android:src="@mipmap/ic_launcher" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Date"
+        android:singleLine="true"
+        android:background="@drawable/rounded"
+        android:id="@+id/event_item_date"
+        android:elevation="2dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="2dp"/>
+
+<LinearLayout
+android:background="@drawable/container_dropshadow"
+android:orientation="horizontal"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="10dp">
+
+<ImageView
+    android:layout_width="64dp"
+    android:layout_height="64dp"
+    android:id="@+id/event_item_image"
+    android:background="@drawable/border"
+    android:scaleType="fitXY"
+    android:clipChildren="false"
+    android:padding="1dp" />
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginLeft="12dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/event_name" />
+        android:id="@+id/event_item_title"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="Test"
+        android:layout_marginTop="2dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/event_item_desc"
+        android:text="Event description" />
 </LinearLayout>
+
+</LinearLayout>
+
+</RelativeLayout>

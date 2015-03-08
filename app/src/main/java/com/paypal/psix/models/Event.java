@@ -4,8 +4,11 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import org.fluttercode.datafactory.impl.DataFactory;
 import org.parceler.Parcel;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Parcel(value = Parcel.Serialization.BEAN, analysisLimit = Model.class)
@@ -32,6 +35,12 @@ public class Event extends Model {
     @Column(name = "PaymentDescription")
     public String paymentDescription;
 
+    @Column(name = "ImageURL")
+    public String imageURL;
+
+    @Column(name = "HasSetup")
+    public boolean hasSetup;
+
     @Column(name = "Timestamp", index = true)
     public long timestamp;
 
@@ -43,11 +52,16 @@ public class Event extends Model {
         super();
     }
 
-    public Event(String name) {
-        this(null, null, name, null, 0, null, 0);
+    public static Event GenerateRandomEvent() {
+        DataFactory df = new DataFactory();
+        Event event = new Event();
+        event.name = df.getRandomWord() + " " + df.getRandomWord() + " " + df.getRandomWord();
+        event.imageURL = "http://lorempixel.com/200/" + (200 + df.getNumberBetween(0, 100)) + "/";
+        event.timestamp = df.getDate(new Date(), 0, 20).getTime();
+        return event;
     }
 
-    public Event(String fbEventId, User organizer, String name, String shareURL, int amountPerUser, String paymentDescription, int timestamp) {
+    public Event(String fbEventId, User organizer, String name, String shareURL, String imageURL, int amountPerUser, String paymentDescription, int timestamp, boolean hasSetup) {
         super();
         this.fbEventId = fbEventId;
         this.organizer = organizer;
@@ -55,6 +69,23 @@ public class Event extends Model {
         this.amountPerUser = amountPerUser;
         this.paymentDescription = paymentDescription;
         this.shareURL = shareURL;
+        this.imageURL = imageURL;
         this.timestamp = timestamp;
+        this.hasSetup = hasSetup;
+    }
+
+    public Event setup() {
+        this.hasSetup = true;
+        this.save();
+        return this;
+    }
+
+    public Date getDate() {
+        return new Date(timestamp);
+    }
+
+    public String getFormattedDate() {
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM");
+        return fmt.format(getDate());
     }
 }

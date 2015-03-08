@@ -1,8 +1,8 @@
 package com.paypal.psix.data;
 
 import com.paypal.psix.helpers.Factories;
-import com.paypal.psix.models.Event;
 import com.paypal.psix.models.User;
+import com.paypal.psix.models.Event;
 
 public class ModelsTests extends DBTest {
 

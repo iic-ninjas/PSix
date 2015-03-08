@@ -8,19 +8,21 @@ import android.view.MenuItem;
 
 import com.paypal.psix.R;
 
-public class EventsActivity extends ActionBarActivity {
+public class EventsActivity extends PSixActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
+        setupActionBar();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_events, menu);
-        return true;
+    private void setupActionBar() {
+        setTitle(" " + getString(R.string.your_events));
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
