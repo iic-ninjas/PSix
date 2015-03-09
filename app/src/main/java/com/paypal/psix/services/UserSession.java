@@ -53,6 +53,15 @@ public class UserSession {
         new UserSession(new User(newUser.getId(), newUser.getFirstName(), newUser.getLastName(), null));
     }
 
+    public static void userLoggedOut() {
+        sessionInstance = null;
+        SharedPreferences.Editor editor = getSharedPrefs().edit();
+        editor.remove(CUR_USER_FBID_KEY);
+        editor.remove(CUR_USER_FIRST_NAME_KEY);
+        editor.remove(CUR_USER_LAST_NAME_KEY);
+        editor.apply();
+    }
+
     private static UserSession sessionInstance;
 
     public static class UserSessionException extends Exception {

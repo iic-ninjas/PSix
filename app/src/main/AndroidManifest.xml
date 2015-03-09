@@ -27,6 +27,7 @@
             android:name=".activities.EventsActivity"
             android:label="@string/your_events" >
         </activity>
+
         <activity
             android:name=".activities.SetupEventActivity"
             android:label="@string/label_setup_activity"
