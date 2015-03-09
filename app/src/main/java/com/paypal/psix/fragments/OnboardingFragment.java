@@ -16,7 +16,6 @@ import com.facebook.widget.FacebookDialog;
 import com.facebook.widget.LoginButton;
 import com.paypal.psix.R;
 import com.paypal.psix.activities.EventsActivity;
-import com.paypal.psix.activities.OnboardingActivity;
 import com.paypal.psix.services.UserSession;
 
 import java.util.Arrays;
