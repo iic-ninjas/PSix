@@ -15,6 +15,8 @@ import com.facebook.model.GraphUser;
 import com.facebook.widget.FacebookDialog;
 import com.facebook.widget.LoginButton;
 import com.paypal.psix.R;
+import com.paypal.psix.activities.EventsActivity;
+import com.paypal.psix.activities.OnboardingActivity;
 import com.paypal.psix.services.UserSession;
 
 import java.util.Arrays;
@@ -73,6 +75,10 @@ public class OnboardingFragment extends Fragment {
         if (user != null) {
             Log.d(LOG_TAG, "User logged in");
             UserSession.setUser(user);
+            this.getActivity().finish();
+            this.getActivity().startActivity(
+                    new Intent(this.getActivity(), EventsActivity.class)
+            );
         } else {
             Log.d(LOG_TAG, "Current user is null");
             if (UserSession.isUserSignedIn()) {
