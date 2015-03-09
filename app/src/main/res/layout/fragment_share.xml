@@ -6,9 +6,5 @@
     android:layout_alignParentTop="true"
     android:background="@drawable/container_dropshadow">
 
-    <include layout="@layout/event_header"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-
 </LinearLayout>
 

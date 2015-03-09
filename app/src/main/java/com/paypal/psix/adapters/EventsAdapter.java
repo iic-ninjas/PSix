@@ -22,6 +22,9 @@ import butterknife.InjectView;
  */
 public class EventsAdapter extends ArrayAdapter<Event> {
 
+    private static final int SETUPED_ICON_UNICODE = 0xf2f8;
+    private static final int NOT_SETUPED_ICON_UNICODE = 0xf2f7;
+
     static class ViewHolder {
         public static int BASE_ROTATION = -12;
         public static int MAX_ROTATION = 10;
@@ -29,6 +32,7 @@ public class EventsAdapter extends ArrayAdapter<Event> {
         @InjectView(R.id.event_item_image) ImageView imageView;
         @InjectView(R.id.event_item_title) TextView titleLabel;
         @InjectView(R.id.event_item_date) TextView dateLabel;
+        @InjectView(R.id.event_item_action_icon) TextView actionIcon;
         @InjectView(R.id.event_item_desc) TextView descLabel;
 
         public ViewHolder(View view) {
@@ -56,8 +60,11 @@ public class EventsAdapter extends ArrayAdapter<Event> {
         }
 
         holder.titleLabel.setText(event.name);
-        holder.dateLabel.setText(event.getFormattedDate());
+        holder.dateLabel.setText(event.getShortFormattedDate());
         Picasso.with(getContext()).load(event.imageURL).into(holder.imageView);
+
+        int iconUnicode = event.hasSetup ? SETUPED_ICON_UNICODE : NOT_SETUPED_ICON_UNICODE;
+        holder.actionIcon.setText(Character.toString((char)iconUnicode));
 
         return view;
     }

@@ -10,10 +10,10 @@ public class ModelsTests extends DBTest {
         String fbUserId = Factories.rndData.getNumberText(Factories.FB_ID_LENGTH);
         String name = Factories.rndData.getName();
 
-        User user = Factories.createUser(fbUserId, name);
+        User user = Factories.createUser(fbUserId, name, null);
 
         assertEquals(fbUserId, user.fbUserId);
-        assertEquals(name, user.name);
+        assertEquals(name, user.firstName);
     }
 
     public void testEventCreation() throws Throwable {

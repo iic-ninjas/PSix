@@ -4,19 +4,24 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-import org.parceler.Parcel;
+import org.fluttercode.datafactory.impl.DataFactory;
 
 import java.util.List;
 
-@Parcel(value = Parcel.Serialization.BEAN, analysisLimit = Model.class)
 @Table(name = "Users")
 public class User extends Model {
 
     @Column(name = "FbUserId", unique = true, onUniqueConflict = Column.ConflictAction.FAIL)
     public String fbUserId;
 
-    @Column(name = "Name")
-    public String name;
+    @Column(name = "FirstName")
+    public String firstName;
+
+    @Column(name = "LastName")
+    public String lastName;
+
+    @Column(name = "AvatarURL")
+    public String avatarURL;
 
     public List<Event> events() {
         return getMany(Event.class, "Organizer");
@@ -30,9 +35,21 @@ public class User extends Model {
         super();
     }
 
-    public User(String fbUserId, String name) {
+    public User(String fbUserId, String firstName, String lastName, String avatarURL) {
         super();
         this.fbUserId = fbUserId;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.avatarURL = avatarURL;
+    }
+
+    public static User GenerateRandomUser() {
+        DataFactory df = new DataFactory();
+        User user = new User();
+        user.firstName = df.getFirstName();
+        user.lastName = df.getLastName();
+        user.avatarURL = "http://lorempixel.com/200/" + (200 + df.getNumberBetween(0, 100)) + "/";
+        user.save();
+        return user;
     }
 }
