@@ -1,6 +1,7 @@
 package com.paypal.psix.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,9 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.paypal.psix.R;
 import com.paypal.psix.activities.SetupEventActivity;
+import com.paypal.psix.activities.ShareActivity;
 import com.paypal.psix.models.Event;
 import com.squareup.picasso.Picasso;
 
@@ -78,7 +81,7 @@ public class SetupEventFragment extends Fragment {
     }
     //endregion
 
-    class CreatePaymentLinkTask extends AsyncTask<Void, Void, Void> {
+    class CreatePaymentLinkTask extends AsyncTask<Void, Void, Boolean> {
 
         @Override
         protected void onPreExecute() {
@@ -88,20 +91,28 @@ public class SetupEventFragment extends Fragment {
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Boolean doInBackground(Void... params) {
             // Send request to server
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            return null;
+            return true;
         }
 
         @Override
-        protected void onPostExecute(Void result) {
+        protected void onPostExecute(Boolean result) {
             progress.dismiss();
-            createPaymentLink.setFocusableInTouchMode(false);
+            if (result) {
+                Toast.makeText(getActivity(), getActivity().getString(R.string.paymentes_added), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), ShareActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            } else {
+                Toast.makeText(getActivity(), getActivity().getString(R.string.paymentes_adding_failed), Toast.LENGTH_LONG).show();
+            }
+
         }
     };
 }
