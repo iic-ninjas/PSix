@@ -1,5 +1,6 @@
 package com.paypal.psix.fragments;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -35,6 +36,7 @@ public class SetupEventFragment extends Fragment {
     @InjectView(R.id.event_header_date) TextView eventDateHeader;
 
     Event event;
+    ProgressDialog progress;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -80,6 +82,7 @@ public class SetupEventFragment extends Fragment {
 
         @Override
         protected void onPreExecute() {
+            progress = ProgressDialog.show(getActivity(), getString(R.string.please_wait), getString(R.string.pluging_in));
             createPaymentLink.setFocusableInTouchMode(true);
             createPaymentLink.requestFocus();
         }
@@ -88,7 +91,7 @@ public class SetupEventFragment extends Fragment {
         protected Void doInBackground(Void... params) {
             // Send request to server
             try {
-                Thread.sleep(1000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -97,6 +100,7 @@ public class SetupEventFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void result) {
+            progress.dismiss();
             createPaymentLink.setFocusableInTouchMode(false);
         }
     };
