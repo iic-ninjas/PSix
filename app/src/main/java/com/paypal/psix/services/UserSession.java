@@ -37,6 +37,10 @@ public class UserSession {
         sessionInstance = this;
     }
 
+    public static boolean isUserSignedIn() {
+        return getSharedPrefs().getString(CUR_USER_FBID_KEY, null) != null;
+    }
+
     public static User getUser() {
         String fbId = getSharedPrefs().getString(CUR_USER_FBID_KEY, null);
         if (fbId != null) {
