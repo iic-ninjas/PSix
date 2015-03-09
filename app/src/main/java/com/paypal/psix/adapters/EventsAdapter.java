@@ -60,7 +60,7 @@ public class EventsAdapter extends ArrayAdapter<Event> {
         }
 
         holder.titleLabel.setText(event.name);
-        holder.dateLabel.setText(event.getFormattedDate());
+        holder.dateLabel.setText(event.getShortFormattedDate());
         Picasso.with(getContext()).load(event.imageURL).into(holder.imageView);
 
         int iconUnicode = event.hasSetup ? SETUPED_ICON_UNICODE : NOT_SETUPED_ICON_UNICODE;

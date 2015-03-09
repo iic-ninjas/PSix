@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.paypal.psix.R;
 import com.paypal.psix.activities.SetupEventActivity;
 import com.paypal.psix.models.Event;
+import com.squareup.picasso.Picasso;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -29,6 +31,8 @@ public class SetupEventFragment extends Fragment {
     @InjectView(R.id.edit_payment_sum) EditText paymentSumText;
     @InjectView(R.id.edit_payment_reason) EditText paymentReasonText;
     @InjectView(R.id.button_create_paymentLink) Button createPaymentLink;
+    @InjectView(R.id.event_header_image) ImageView eventImageHeader;
+    @InjectView(R.id.event_header_date) TextView eventDateHeader;
 
     Event event;
 
@@ -39,6 +43,8 @@ public class SetupEventFragment extends Fragment {
 
         event = ((SetupEventActivity)getActivity()).event;
         eventTitle.setText(event.name);
+        eventDateHeader.setText(event.getFormattedDate());
+        Picasso.with(getActivity()).load(event.imageURL).into(eventImageHeader);
 
         return view;
     }

@@ -1,47 +1,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ioniconview="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:layout_alignParentTop="true"
-    android:background="@drawable/container_dropshadow">
+    android:background="@drawable/container_dropshadow"
+    android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="PH: Event Name"
-        android:layout_marginBottom="20dp"
-        android:id="@+id/event_name_text_view"
-        android:layout_gravity="center_horizontal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/label_setup_event_price"
-        android:layout_marginBottom="30dp"
-        android:layout_gravity="center_horizontal" />
+    <include layout="@layout/event_header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
-        android:gravity="center"
         android:weightSum="1.0"
-        >
+        android:gravity="left">
+
+        <be.webelite.ion.IconView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            ioniconview:name="ion_android_social_user"
+            android:id="@+id/event_item_action_icon"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:textColor="#000" />
+
         <EditText
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight=".5"
             android:minHeight="50dp"
             android:hint="@string/hint_setup_event_price"
             android:inputType="number"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:background="@drawable/border"
             android:ems="50"
-            android:id="@+id/edit_payment_sum"/>
+            android:id="@+id/edit_payment_sum"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <TextView
@@ -70,7 +67,10 @@
         android:layout_gravity="center_horizontal"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp" />
+        android:background="@color/main_color"
+        android:textColor="#ffffffff"
+        android:padding="10dp"
+        android:layout_marginTop="20dp" />
 
 
 </LinearLayout>
