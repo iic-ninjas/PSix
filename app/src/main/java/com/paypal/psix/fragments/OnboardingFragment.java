@@ -95,18 +95,6 @@ public class OnboardingFragment extends Fragment {
         uiHelper.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        uiHelper.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        uiHelper.onDestroy();
-    }
-
     private void onSessionStateChange(Session session, SessionState state, Exception e) {}
 
 }
