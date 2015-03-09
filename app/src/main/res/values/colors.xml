@@ -4,7 +4,8 @@
     <color name="secondary_color">#C4DAAD</color>
     <color name="color_light">#96A6CE</color>
     <color name="color_light_with_alpha">#aa96A6CE</color>
-    <color name="cool_stuff_color">#734D5C</color>
+    <color name="cool_stuff_color">#ff4a83d1</color>
     <color name="green_color">#558133</color>
     <color name="gold_color">#ead949</color>
+    <color name="gray_color">#aaa</color>
 </resources>

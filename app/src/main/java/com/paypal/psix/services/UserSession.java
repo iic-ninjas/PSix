@@ -41,7 +41,8 @@ public class UserSession {
             return new User(
                     fbId,
                     getSharedPrefs().getString(CUR_USER_FIRST_NAME_KEY, null),
-                    getSharedPrefs().getString(CUR_USER_LAST_NAME_KEY, null)
+                    getSharedPrefs().getString(CUR_USER_LAST_NAME_KEY, null),
+                    null
             );
         }
 
@@ -49,7 +50,7 @@ public class UserSession {
     }
 
     public static void setUser(GraphUser newUser) {
-        new UserSession(new User(newUser.getId(), newUser.getFirstName(), newUser.getLastName()));
+        new UserSession(new User(newUser.getId(), newUser.getFirstName(), newUser.getLastName(), null));
     }
 
     public static void userLoggedOut() {

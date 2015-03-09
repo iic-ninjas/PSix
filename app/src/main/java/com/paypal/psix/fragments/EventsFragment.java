@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.activeandroid.query.Select;
 import com.paypal.psix.R;
 import com.paypal.psix.activities.EventStatusActivity;
 import com.paypal.psix.activities.SetupEventActivity;
@@ -16,9 +17,9 @@ import com.paypal.psix.adapters.EventsAdapter;
 import com.paypal.psix.models.Event;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -65,14 +66,9 @@ public class EventsFragment extends Fragment {
 
     private ArrayList<Event> eventsDataSource() {
         // Demo data.
-        Event[] array = {
-                Event.GenerateRandomEvent(), Event.GenerateRandomEvent().setup(), Event.GenerateRandomEvent(),
-                Event.GenerateRandomEvent(), Event.GenerateRandomEvent(), Event.GenerateRandomEvent(),
-                Event.GenerateRandomEvent(), Event.GenerateRandomEvent().setup(), Event.GenerateRandomEvent(),
-                Event.GenerateRandomEvent(), Event.GenerateRandomEvent(), Event.GenerateRandomEvent()
-        };
 
-        ArrayList<Event> arrayList = new ArrayList<>(Arrays.asList(array));
+        List<Event> list = new Select().from(Event.class).execute();
+        ArrayList<Event> arrayList = new ArrayList<>(list);
 
         Collections.sort(arrayList, new Comparator<Event>() {
             public int compare(Event e1, Event e2) {

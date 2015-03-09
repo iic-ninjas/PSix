@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="64dp">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="match_parent"
+            android:id="@+id/event_header_image"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/border"
+            android:scaleType="fitXY"
+            android:baselineAlignBottom="true"
+            android:padding="1dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="PH: Event Name"
+                android:id="@+id/event_name_text_view"
+                android:layout_gravity="left"
+                android:ellipsize="end"
+                android:singleLine="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Date"
+                android:id="@+id/event_header_date"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="#ffa6a6a6" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/border"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/main_color" />
+
+</LinearLayout>

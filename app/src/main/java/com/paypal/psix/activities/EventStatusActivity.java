@@ -12,8 +12,7 @@ public class EventStatusActivity extends PSixActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_status);
         event = Event.find(getIntent().getExtras().getLong(Event.TAG));
-        setTitle(event.name);
+        setContentView(R.layout.activity_event_status);
     }
 }

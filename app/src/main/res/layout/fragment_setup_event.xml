@@ -1,95 +1,133 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ioniconview="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_alignParentTop="true"
+    android:background="@drawable/container_dropshadow"
+    android:padding="16dp">
+
+    <include layout="@layout/event_header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/you_invited"
+        android:id="@+id/event_number_of_invitees"
+        android:textColor="#ff363636"
+        android:layout_marginBottom="10dp" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        android:layout_alignParentTop="true">
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:weightSum="1.0"
+        android:gravity="left">
+
+        <be.webelite.ion.IconView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ioniconview:name="ion_ios7_pricetag"
+            android:id="@+id/event_item_action_icon"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:textColor="#000"
+            android:layout_marginRight="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="PH: Event Name"
-            android:layout_marginBottom="20dp"
-            android:id="@+id/event_name_text_view"
-            android:layout_gravity="center_horizontal" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/label_setup_event_price"
-            android:layout_marginBottom="30dp"
-            android:layout_gravity="center_horizontal" />
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
-            android:gravity="center"
-            android:weightSum="1.0"
-            >
-            <EditText
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:minHeight="50dp"
-                android:hint="@string/hint_setup_event_price"
-                android:inputType="number"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:background="@drawable/border"
-                android:ems="50"
-                android:id="@+id/edit_payment_sum"/>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/label_setup_event_reason"
-            android:layout_gravity="center_horizontal" />
-
+            android:text="$"
+            android:id="@+id/textView4"
+            android:layout_marginRight="0dp"
+            android:textColor="#ff363636" />
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:minHeight="100dp"
-            android:id="@+id/edit_payment_reason"
-            android:background="@drawable/border"
-            android:gravity="top"
-            android:hint="@string/hint_setup_event_reason" />
-    </LinearLayout>
+            android:minHeight="50dp"
+            android:hint="@string/hint_setup_event_price"
+            android:inputType="number"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:ems="50"
+            android:id="@+id/edit_payment_sum"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/edit_text_border"
+            android:padding="5dp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:text="@string/button_create_payment_link"
-        android:id="@+id/button_create_paymentLink"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp" />
-
-    <com.paypal.psix.ModalRelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/setup_event_progress_bar_container"
-        android:visibility="gone"
-        android:focusableInTouchMode="true"
-        android:background="@color/color_light_with_alpha" >
-        <ProgressBar
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/setup_event_progress_bar"
-            style="@android:style/Widget.ProgressBar.Large.Inverse"
-            android:layout_centerInParent="true"
-            />
-    </com.paypal.psix.ModalRelativeLayout>
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/dollar_per"
+            android:id="@+id/textView" />
 
-</RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp">
+
+        <be.webelite.ion.IconView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ioniconview:name="ion_document_text"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:textColor="#000"
+            android:layout_marginRight="7dp"
+            android:layout_marginLeft="2dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/label_setup_event_reason" />
+    </LinearLayout>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minHeight="100dp"
+        android:id="@+id/edit_payment_reason"
+        android:background="@drawable/edit_text_border"
+        android:gravity="top"
+        android:hint="@string/hint_setup_event_reason"
+        android:padding="5dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="@string/button_create_payment_link"
+            android:id="@+id/button_create_paymentLink"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffffff"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:elevation="5dp"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/psix_button" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
+

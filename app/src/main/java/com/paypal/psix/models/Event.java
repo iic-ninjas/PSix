@@ -84,8 +84,13 @@ public class Event extends Model {
         return new Date(timestamp);
     }
 
-    public String getFormattedDate() {
+    public String getShortFormattedDate() {
         SimpleDateFormat fmt = new SimpleDateFormat("dd/MM");
+        return fmt.format(getDate());
+    }
+
+    public String getFormattedDate() {
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM HH:mm");
         return fmt.format(getDate());
     }
 
