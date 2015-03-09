@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">P⁶</string>
 
-    <string name="label_setup_activity">Setup Payment</string>
+    <string name="label_setup_activity">Setup Payments</string>
     <string name="hint_setup_event_price">50</string>
-    <string name="hint_setup_event_reason">The cost is to cover beer, chips and fruits for the party</string>
-    <string name="label_setup_event_reason">Why are you requesting money?</string>
+    <string name="hint_setup_event_reason">Example: Hey guys, we need this amount for beers and nachos!</string>
+    <string name="label_setup_event_reason">Payment Description</string>
 
     <string name="action_debug_events_list">DBG: Events List</string>
     <string name="title_activity_onboarding">OnboardingActivity</string>
@@ -29,4 +29,5 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_status">Payments Status</string>
+    <string name="dollar_per">per attendee</string>
 </resources>

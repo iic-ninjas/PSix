@@ -15,48 +15,83 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="15dp"
         android:weightSum="1.0"
         android:gravity="left">
 
         <be.webelite.ion.IconView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            ioniconview:name="ion_android_social_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ioniconview:name="ion_ios7_pricetag"
             android:id="@+id/event_item_action_icon"
             android:gravity="center"
             android:textSize="24dp"
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:layout_marginRight="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="$"
+            android:id="@+id/textView4"
+            android:layout_marginRight="0dp"
+            android:textColor="#ff363636" />
 
         <EditText
-            android:layout_width="0dip"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:minHeight="50dp"
             android:hint="@string/hint_setup_event_price"
             android:inputType="number"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:background="@drawable/border"
             android:ems="50"
             android:id="@+id/edit_payment_sum"
-            android:layout_weight="1" />
+            android:layout_marginRight="5dp"
+            android:background="@drawable/edit_text_border"
+            android:padding="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/dollar_per"
+            android:id="@+id/textView" />
+
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/label_setup_event_reason"
-        android:layout_gravity="center_horizontal" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <be.webelite.ion.IconView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ioniconview:name="ion_document_text"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:textColor="#000"
+            android:layout_marginRight="7dp"
+            android:layout_marginLeft="2dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/label_setup_event_reason" />
+    </LinearLayout>
 
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:minHeight="100dp"
         android:id="@+id/edit_payment_reason"
-        android:background="@drawable/border"
+        android:background="@drawable/edit_text_border"
         android:gravity="top"
-        android:hint="@string/hint_setup_event_reason" />
+        android:hint="@string/hint_setup_event_reason"
+        android:padding="5dp" />
 
     <Button
         android:layout_width="wrap_content"
