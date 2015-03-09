@@ -24,7 +24,7 @@ import java.util.List;
 public class OnboardingFragment extends Fragment {
 
     private static final String LOG_TAG = "MainFragment";
-    private static final List<String> PERMISSIONS = Arrays.asList("public_profile");
+    private static final List<String> PERMISSIONS = Arrays.asList("public_profile", "user_events");
 
     private LoginButton loginButton;
     private UiLifecycleHelper uiHelper;
