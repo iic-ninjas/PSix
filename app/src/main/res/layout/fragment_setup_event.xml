@@ -11,6 +11,15 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="You invited 0 people"
+        android:id="@+id/event_number_of_invitees"
+        android:textColor="#ff363636"
+        android:layout_marginBottom="10dp" />
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -63,7 +72,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp">
 
         <be.webelite.ion.IconView
             android:layout_width="wrap_content"
@@ -91,21 +101,32 @@
         android:background="@drawable/edit_text_border"
         android:gravity="top"
         android:hint="@string/hint_setup_event_reason"
-        android:padding="5dp" />
+        android:padding="5dp"
+        android:layout_weight="1" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:text="@string/button_create_payment_link"
-        android:id="@+id/button_create_paymentLink"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@color/main_color"
-        android:textColor="#ffffffff"
-        android:padding="10dp"
-        android:layout_marginTop="20dp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="@string/button_create_payment_link"
+            android:id="@+id/button_create_paymentLink"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/main_color"
+            android:textColor="#ffffffff"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:elevation="5dp"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp" />
+
+    </LinearLayout>
 
 
 </LinearLayout>
