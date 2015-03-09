@@ -37,7 +37,7 @@ public class UserSession {
         sessionInstance = this;
     }
 
-    public User getUser() {
+    public static User getUser() {
         String fbId = getSharedPrefs().getString(CUR_USER_FBID_KEY, null);
         if (fbId != null) {
             return new User(
