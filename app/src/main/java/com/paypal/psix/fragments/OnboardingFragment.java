@@ -23,7 +23,7 @@ import java.util.List;
 
 public class OnboardingFragment extends Fragment {
 
-    private static final String LOG_TAG = "MainFragment";
+    private static final String LOG_TAG = OnboardingFragment.class.getSimpleName();
     private static final List<String> PERMISSIONS = Arrays.asList("public_profile", "user_events");
 
     private LoginButton loginButton;
@@ -71,9 +71,14 @@ public class OnboardingFragment extends Fragment {
 
     private void updateUserData() {
         if (user != null) {
+            Log.d(LOG_TAG, "User logged in");
             UserSession.setUser(user);
         } else {
             Log.d(LOG_TAG, "Current user is null");
+            if (UserSession.isUserSignedIn()) {
+                UserSession.userLoggedOut();
+                Log.d(LOG_TAG, "User logged out");
+            }
         }
     }
 
