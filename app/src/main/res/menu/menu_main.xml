@@ -3,10 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.paypal.psix.activities.EventsActivity">
 
-    <item
-        android:id="@+id/action_debug_start_onboarding"
-        android:title="DBG: Onboarding"/>
-
     <item android:id="@+id/action_settings"
         android:title="@string/title_activity_settings"
         android:orderInCategory="100"
