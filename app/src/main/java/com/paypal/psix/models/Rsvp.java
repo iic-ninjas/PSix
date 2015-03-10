@@ -8,9 +8,7 @@ import com.activeandroid.annotation.Table;
 public class Rsvp extends Model {
 
     public enum RsvpStatus {
-        NOT_ATTENDING,
-        MAYBE,
-        ATTENDING
+        NO_REPLY, NOT_ATTENDING, MAYBE, ATTENDING
     }
 
     @Column(name = "RemoteId", unique = true, onUniqueConflict = Column.ConflictAction.FAIL)

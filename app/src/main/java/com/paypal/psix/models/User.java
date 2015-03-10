@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "Users")
 public class User extends Model {
 
-    @Column(name = "FbUserId", unique = true, onUniqueConflict = Column.ConflictAction.FAIL)
+    @Column(name = "FbUserId", unique = true, onUniqueConflict = Column.ConflictAction.IGNORE)
     public String fbUserId;
 
     @Column(name = "FirstName")

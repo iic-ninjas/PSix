@@ -25,4 +25,14 @@ public class FacebookService {
             callback
         ).executeAsync();
     }
+
+    public static Request getInviteesForEventRequest(String fbEventId, Request.Callback callback) {
+        return new Request(
+            Session.getActiveSession(),
+            "/" + fbEventId + "/invited",
+            null,
+            HttpMethod.GET,
+            callback
+        );
+    }
 }
