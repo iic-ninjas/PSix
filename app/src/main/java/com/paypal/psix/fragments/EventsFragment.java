@@ -56,6 +56,8 @@ public class EventsFragment extends Fragment implements FacebookSyncService.Even
                 if (event != null) navigateToEvent(event);
             }
         });
+        
+        FacebookSyncService.syncFacebookEvent(this);
 
         return rootView;
     }

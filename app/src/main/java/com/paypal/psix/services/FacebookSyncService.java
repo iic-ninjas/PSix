@@ -16,6 +16,9 @@ import java.util.Date;
 
 public class FacebookSyncService {
 
+    private static final String COMPLEX_FB_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
+    private static final String SIMPLE_FB_DATE_FORMAT  = "yyyy-MM-dd";
+
     public interface EventsSyncCallback {
         void eventsSyncedCallback();
     }
@@ -39,7 +42,6 @@ public class FacebookSyncService {
         event.name      = (String)obj.getProperty("name");
         event.imageURL  = (String)obj.getPropertyAs("cover", GraphObject.class).getProperty("source");
         event.timestamp = parseTimestampFromGraphObject(obj);
-
         event.save();
         return event;
     }
@@ -49,12 +51,12 @@ public class FacebookSyncService {
         String dateString = (String) obj.getProperty("start_time");
         Date date;
         try {
-            format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+            format = new SimpleDateFormat(COMPLEX_FB_DATE_FORMAT);
             date = format.parse(dateString);
             return date.getTime();
         } catch (ParseException e1) {
             try {
-                format = new SimpleDateFormat("yyyy-MM-dd");
+                format = new SimpleDateFormat(SIMPLE_FB_DATE_FORMAT);
                 date = format.parse(dateString);
                 return date.getTime();
             } catch (ParseException e2) {
