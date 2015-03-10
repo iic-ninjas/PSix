@@ -42,7 +42,7 @@ public class EventsFragment extends Fragment {
     @InjectView(R.id.events_list_view) ListView listView;
 
     EventsAdapter adapter;
-    ArrayList<Event> data;
+    ArrayList<Event> data = new ArrayList<>();
 
     public EventsFragment() {
     }
@@ -53,7 +53,7 @@ public class EventsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_events, container, false);
         ButterKnife.inject(this, rootView);
 
-        data = eventsDataSource();
+        refreshDataSource();
         adapter = new EventsAdapter(getActivity(), data);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -80,13 +80,12 @@ public class EventsFragment extends Fragment {
         startActivity(intent);
     }
 
-    private ArrayList<Event> eventsDataSource() {
-        // Demo data.
-
+    private void refreshDataSource() {
+        data.clear();
         List<Event> list = new Select().from(Event.class).execute();
-        ArrayList<Event> arrayList = new ArrayList<>(list);
+        data.addAll(list);
 
-        Collections.sort(arrayList, new Comparator<Event>() {
+        Collections.sort(data, new Comparator<Event>() {
             public int compare(Event e1, Event e2) {
                 if (e1.hasSetup && e2.hasSetup || !e1.hasSetup && !e2.hasSetup) {
                     return (e1.timestamp > e2.timestamp) ? 1 : -1;
@@ -97,19 +96,20 @@ public class EventsFragment extends Fragment {
                 } else return (e1.timestamp > e2.timestamp) ? 1 : -1;
             }
         });
-
-        return arrayList;
     }
 
     private void syncData() {
         FacebookService.getUserCreatedFutureEvents(new Request.Callback() {
             public void onCompleted(Response response) {
-                GraphObjectList<GraphObject> objects = response.getGraphObject().getPropertyAsList("data", GraphObject.class);
-                for (GraphObject obj : objects) {
-                    createEventFromGraphObject(obj);
+                GraphObject mainObj = response.getGraphObject();
+                if (mainObj != null) {
+                    GraphObjectList<GraphObject> objects = mainObj.getPropertyAsList("data", GraphObject.class);
+                    for (GraphObject obj : objects) {
+                        createEventFromGraphObject(obj);
+                    }
+                    refreshDataSource();
+                    adapter.notifyDataSetChanged();
                 }
-
-
             }
         });
     }
@@ -118,13 +118,23 @@ public class EventsFragment extends Fragment {
         Event event = new Event();
         event.fbEventId = (String)obj.getProperty("id");
         event.name = (String)obj.getProperty("name");
+        event.imageURL = (String)obj.getPropertyAs("cover", GraphObject.class).getProperty("source");
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        SimpleDateFormat format;
+        String dateString = (String) obj.getProperty("start_time");
+        Date date;
         try {
-            Date date = format.parse((String) obj.getProperty("start_time"));
+            format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+            date = format.parse(dateString);
             event.timestamp = date.getTime();
-        } catch (ParseException e) {
-            // do nothing
+        } catch (ParseException e1) {
+            try {
+                format = new SimpleDateFormat("yyyy-MM-dd");
+                date = format.parse(dateString);
+                event.timestamp = date.getTime();
+            } catch (ParseException e2) {
+
+            }
         }
         event.save();
         return event;
