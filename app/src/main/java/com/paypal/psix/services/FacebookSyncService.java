@@ -1,5 +1,6 @@
 package com.paypal.psix.services;
 
+import com.activeandroid.query.Select;
 import com.facebook.Request;
 import com.facebook.RequestBatch;
 import com.facebook.Response;
@@ -72,14 +73,18 @@ public class FacebookSyncService {
     }
 
     private static Rsvp createRsvpFromGraphObject(GraphObject obj, Event event) {
-        String[] names = ((String)obj.getProperty("name")).split(" ");
+        String fbId = (String) obj.getProperty("id");
 
-        User user = new User();
-        user.fbUserId = (String)obj.getProperty("id");
-        user.firstName = names[0];
-        user.lastName = names[0];
-        user.avatarURL = "http://graph.facebook.com/" + user.fbUserId + "/picture?type=square";
-        user.save();
+        User user =  new Select().from(User.class).where("FbUserId = ?", fbId).executeSingle();;
+        if (user == null) {
+            user = new User();
+            String[] names = ((String)obj.getProperty("name")).split(" ");
+            user.fbUserId = fbId;
+            user.firstName = names[0];
+            user.lastName = names[0];
+            user.avatarURL = "http://graph.facebook.com/" + user.fbUserId + "/picture?type=square";
+            user.save();
+        }
 
         Rsvp rsvp = new Rsvp();
         rsvp.event = event;
@@ -90,12 +95,16 @@ public class FacebookSyncService {
 
 
     private static Event createEventFromGraphObject(GraphObject obj) {
-        Event event = new Event();
-        event.fbEventId = (String)obj.getProperty("id");
-        event.name      = (String)obj.getProperty("name");
-        event.imageURL  = (String)obj.getPropertyAs("cover", GraphObject.class).getProperty("source");
-        event.timestamp = parseTimestampFromGraphObject(obj);
-        event.save();
+        String fbEventId = (String) obj.getProperty("id");
+        Event event = new Select().from(Event.class).where("FbEventId = ?", fbEventId).executeSingle();
+        if (event == null) {
+            event = new Event();
+            event.fbEventId = fbEventId;
+            event.name = (String) obj.getProperty("name");
+            event.imageURL = (String) obj.getPropertyAs("cover", GraphObject.class).getProperty("source");
+            event.timestamp = parseTimestampFromGraphObject(obj);
+            event.save();
+        }
         return event;
     }
 
