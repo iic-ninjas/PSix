@@ -6,7 +6,6 @@
     <string name="hint_setup_event_reason">Example: Hey guys, we need this amount for beers and nachos!</string>
     <string name="label_setup_event_reason">Payment Description</string>
 
-    <string name="action_debug_events_list">DBG: Events List</string>
     <string name="title_activity_onboarding">OnboardingActivity</string>
     <string name="action_string_onboarding">Onboarding</string>
     <string name="title_activity_hello">HelloActivity</string>

@@ -9,16 +9,18 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.activeandroid.query.Select;
 import com.paypal.psix.R;
 import com.paypal.psix.activities.EventStatusActivity;
 import com.paypal.psix.activities.SetupEventActivity;
 import com.paypal.psix.adapters.EventsAdapter;
 import com.paypal.psix.models.Event;
+import com.paypal.psix.services.FacebookSyncService;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -26,9 +28,14 @@ import butterknife.InjectView;
 /**
  * Created by shay on 3/3/15.
  */
-public class EventsFragment extends Fragment {
+public class EventsFragment extends Fragment implements FacebookSyncService.EventsSyncCallback {
+
+    private static final String LOG_TAG = "Events";
 
     @InjectView(R.id.events_list_view) ListView listView;
+
+    EventsAdapter adapter;
+    ArrayList<Event> data = new ArrayList<>();
 
     public EventsFragment() {
     }
@@ -39,7 +46,9 @@ public class EventsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_events, container, false);
         ButterKnife.inject(this, rootView);
 
-        listView.setAdapter(new EventsAdapter(getActivity(), eventsDataSource()));
+        refreshDataSource();
+        adapter = new EventsAdapter(getActivity(), data);
+        listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -47,6 +56,8 @@ public class EventsFragment extends Fragment {
                 if (event != null) navigateToEvent(event);
             }
         });
+
+        FacebookSyncService.syncFacebookEvent(this);
 
         return rootView;
     }
@@ -63,18 +74,12 @@ public class EventsFragment extends Fragment {
         startActivity(intent);
     }
 
-    private ArrayList<Event> eventsDataSource() {
-        // Demo data.
-        Event[] array = {
-                Event.GenerateRandomEvent(), Event.GenerateRandomEvent().setup(), Event.GenerateRandomEvent(),
-                Event.GenerateRandomEvent(), Event.GenerateRandomEvent(), Event.GenerateRandomEvent(),
-                Event.GenerateRandomEvent(), Event.GenerateRandomEvent().setup(), Event.GenerateRandomEvent(),
-                Event.GenerateRandomEvent(), Event.GenerateRandomEvent(), Event.GenerateRandomEvent()
-        };
+    private void refreshDataSource() {
+        data.clear();
+        List<Event> list = new Select().from(Event.class).execute();
+        data.addAll(list);
 
-        ArrayList<Event> arrayList = new ArrayList<>(Arrays.asList(array));
-
-        Collections.sort(arrayList, new Comparator<Event>() {
+        Collections.sort(data, new Comparator<Event>() {
             public int compare(Event e1, Event e2) {
                 if (e1.hasSetup && e2.hasSetup || !e1.hasSetup && !e2.hasSetup) {
                     return (e1.timestamp > e2.timestamp) ? 1 : -1;
@@ -85,8 +90,12 @@ public class EventsFragment extends Fragment {
                 } else return (e1.timestamp > e2.timestamp) ? 1 : -1;
             }
         });
-
-        return arrayList;
-
     }
+
+    @Override
+    public void eventsSyncedCallback() {
+        refreshDataSource();
+        adapter.notifyDataSetChanged();
+    }
+
 }

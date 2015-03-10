@@ -16,7 +16,7 @@ public class Event extends Model {
 
     public static final String TAG = "Events";
 
-    @Column(name = "FbEventId", unique = true, onUniqueConflict = Column.ConflictAction.FAIL)
+    @Column(name = "FbEventId", unique = true, onUniqueConflict = Column.ConflictAction.IGNORE)
     public String fbEventId;
 
     @Column(name = "Organizer", index = true)
