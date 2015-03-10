@@ -26,9 +26,7 @@ public class FacebookSyncService {
                 GraphObject mainObj = response.getGraphObject();
                 if (mainObj != null) {
                     GraphObjectList<GraphObject> objects = mainObj.getPropertyAsList("data", GraphObject.class);
-                    for (GraphObject obj : objects) {
-                        createEventFromGraphObject(obj);
-                    }
+                    for (GraphObject obj : objects) createEventFromGraphObject(obj);
                     callbackHandler.eventsSyncedCallback();
                 }
             }
@@ -38,26 +36,30 @@ public class FacebookSyncService {
     private static Event createEventFromGraphObject(GraphObject obj) {
         Event event = new Event();
         event.fbEventId = (String)obj.getProperty("id");
-        event.name = (String)obj.getProperty("name");
-        event.imageURL = (String)obj.getPropertyAs("cover", GraphObject.class).getProperty("source");
+        event.name      = (String)obj.getProperty("name");
+        event.imageURL  = (String)obj.getPropertyAs("cover", GraphObject.class).getProperty("source");
+        event.timestamp = parseTimestampFromGraphObject(obj);
 
+        event.save();
+        return event;
+    }
+
+    private static long parseTimestampFromGraphObject(GraphObject obj) {
         SimpleDateFormat format;
         String dateString = (String) obj.getProperty("start_time");
         Date date;
         try {
             format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
             date = format.parse(dateString);
-            event.timestamp = date.getTime();
+            return date.getTime();
         } catch (ParseException e1) {
             try {
                 format = new SimpleDateFormat("yyyy-MM-dd");
                 date = format.parse(dateString);
-                event.timestamp = date.getTime();
+                return date.getTime();
             } catch (ParseException e2) {
-
+                return 0;
             }
         }
-        event.save();
-        return event;
     }
 }
