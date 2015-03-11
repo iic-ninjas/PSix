@@ -8,6 +8,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 
 import com.paypal.psix.R;
+import com.paypal.psix.activities.SetupEventActivity;
 
 /**
  * Created by shay on 3/3/15.
@@ -30,15 +31,22 @@ public class ShareDialogFragment extends DialogFragment {
                 .setPositiveButton(getString(R.string.exit_share), new DialogInterface.OnClickListener() {
                     // this is actually the negative one - you can't order them :(
                     public void onClick(DialogInterface dialog, int id) {
-                        // FIRE ZE MISSILES!
+                        finishShareFlow();
                     }
                 })
                 .setNegativeButton(getString(R.string.share_by_post), new DialogInterface.OnClickListener() {
                     // this is the positive one
                     public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
+                    finishShareFlow();
                     }
                 });
         return builder.create();
+    }
+
+    private void finishShareFlow() {
+        dismiss();
+        if (getActivity().getClass() == SetupEventActivity.class) {
+            getActivity().finish();
+        }
     }
 }
