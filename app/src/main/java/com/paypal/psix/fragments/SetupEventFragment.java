@@ -110,6 +110,7 @@ public class SetupEventFragment extends Fragment {
         protected void onPostExecute(Boolean result) {
             progress.dismiss();
             if (result) {
+                event.setup();
                 Toast.makeText(getActivity(), getActivity().getString(R.string.paymentes_added), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getActivity(), ShareActivity.class);
                 startActivity(intent);

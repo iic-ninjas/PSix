@@ -13,9 +13,9 @@ import butterknife.ButterKnife;
 /**
  * Created by shay on 3/3/15.
  */
-public class ShareFragment extends Fragment {
+public class ShareDialogFragment extends Fragment {
 
-    public ShareFragment() {
+    public ShareDialogFragment() {
     }
 
     @Override
