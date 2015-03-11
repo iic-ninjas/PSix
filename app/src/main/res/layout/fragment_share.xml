@@ -8,7 +8,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/share_url"
         android:text="Hello"
         android:layout_weight="10"
         android:layout_marginRight="10dp"
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Copy"
-        android:id="@+id/button"
+        android:id="@+id/share_copy_button"
         android:layout_weight="1"
         android:textColor="#ffffffff"
         android:background="@drawable/psix_button" />

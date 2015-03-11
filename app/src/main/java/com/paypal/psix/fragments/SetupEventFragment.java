@@ -68,6 +68,11 @@ public class SetupEventFragment extends Fragment {
         return view;
     }
 
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
+
     @OnClick(R.id.button_create_paymentLink)
     public void createPaymentLinkClicked() {
         event.amountPerUser = Integer.parseInt(paymentSumText.getText().toString());

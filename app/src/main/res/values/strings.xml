@@ -36,6 +36,7 @@
     <string name="fetching_events">Fetching your events</string>
     <string name="paymentes_added">Payments added successfully!</string>
     <string name="paymentes_adding_failed">Something went wrong...</string>
+    <string name="share_copied">URL Copied</string>
     <string name="title_share_activity">Share Payment</string>
 
     <plurals
@@ -51,4 +52,5 @@
     <string name="share_by_post">Share by post</string>
     <string name="exit_share">Exit</string>
     <string name="share_instructions">Share the link manually or post it in as a post in your event.</string>
+    <string name="psix_share_url_tag">PSix Share URL</string>
 </resources>
