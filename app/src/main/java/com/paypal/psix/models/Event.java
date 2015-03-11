@@ -15,6 +15,7 @@ import java.util.List;
 public class Event extends Model {
 
     public static final String TAG = "Events";
+    public static final String SHARE_URL_BASE = "psix.parseapp.com/";
 
     @Column(name = "FbEventId", unique = true, onUniqueConflict = Column.ConflictAction.IGNORE)
     public String fbEventId;
@@ -79,6 +80,8 @@ public class Event extends Model {
         this.save();
         return this;
     }
+
+    public String getShareURL() { return SHARE_URL_BASE + this.fbEventId; }
 
     public int getNumberOfInvitees() { return this.rsvps().size() - 1; }
 

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.paypal.psix.R;
 import com.paypal.psix.activities.SetupEventActivity;
 import com.paypal.psix.utils.ClipboardUtil;
+import com.paypal.psix.utils.HasEvent;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -56,7 +57,7 @@ public class ShareDialogFragment extends DialogFragment {
             });
         ButterKnife.inject(this, view);
 
-        urlTextField.setText("hey");
+        urlTextField.setText(((HasEvent)getActivity()).getEvent().getShareURL());
 
         return builder.create();
     }

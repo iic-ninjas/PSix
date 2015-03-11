@@ -7,8 +7,9 @@ import android.view.MenuItem;
 import com.paypal.psix.R;
 import com.paypal.psix.fragments.ShareDialogFragment;
 import com.paypal.psix.models.Event;
+import com.paypal.psix.utils.HasEvent;
 
-public class EventStatusActivity extends PSixActionBarActivity {
+public class EventStatusActivity extends PSixActionBarActivity implements HasEvent {
 
     public Event event;
 
@@ -35,5 +36,10 @@ public class EventStatusActivity extends PSixActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public Event getEvent() {
+        return event;
     }
 }

@@ -14,7 +14,8 @@
         android:layout_marginRight="10dp"
         android:enabled="true"
         android:textIsSelectable="true"
-        android:editable="false" />
+        android:editable="false"
+        android:singleLine="true" />
 
     <Button
         android:layout_width="wrap_content"
