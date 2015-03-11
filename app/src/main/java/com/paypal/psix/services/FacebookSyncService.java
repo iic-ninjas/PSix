@@ -82,17 +82,19 @@ public class FacebookSyncService {
             user.fbUserId = fbId;
             user.firstName = names[0];
             user.lastName = names[0];
-            user.avatarURL = "http://graph.facebook.com/" + user.fbUserId + "/picture?type=square";
             user.save();
         }
 
-        Rsvp rsvp = new Rsvp();
-        rsvp.event = event;
-        rsvp.user = user;
+        Rsvp rsvp = new Select().from(Rsvp.class).where("User = ? AND Event = ?", user.getId(), event.getId()).executeSingle();
+        if (rsvp == null) {
+            rsvp = new Rsvp();
+            rsvp.event = event;
+            rsvp.user = user;
+        }
+        rsvp.status = (String)obj.getProperty("rsvp_status");
         rsvp.save();
         return rsvp;
     }
-
 
     private static Event createEventFromGraphObject(GraphObject obj) {
         String fbEventId = (String) obj.getProperty("id");

@@ -20,9 +20,6 @@ public class User extends Model {
     @Column(name = "LastName")
     public String lastName;
 
-    @Column(name = "AvatarURL")
-    public String avatarURL;
-
     public List<Event> events() {
         return getMany(Event.class, "Organizer");
     }
@@ -40,7 +37,6 @@ public class User extends Model {
         this.fbUserId = fbUserId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.avatarURL = avatarURL;
     }
 
     public static User GenerateRandomUser() {
@@ -48,8 +44,11 @@ public class User extends Model {
         User user = new User();
         user.firstName = df.getFirstName();
         user.lastName = df.getLastName();
-        user.avatarURL = "http://lorempixel.com/200/" + (200 + df.getNumberBetween(0, 100)) + "/";
         user.save();
         return user;
+    }
+
+    public String getAvatarURL() {
+        return "http://graph.facebook.com/" + this.fbUserId + "/picture?type=square";
     }
 }

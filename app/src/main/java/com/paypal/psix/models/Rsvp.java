@@ -7,18 +7,12 @@ import com.activeandroid.annotation.Table;
 @Table(name = "Rsvps")
 public class Rsvp extends Model {
 
-    public enum RsvpStatus {
-        NO_REPLY, NOT_ATTENDING, MAYBE, ATTENDING
-    }
-
-    @Column(name = "RemoteId", unique = true, onUniqueConflict = Column.ConflictAction.FAIL)
-    public String remoteId;
-
-    @Column(name = "Amount", index = true)
+    @Column(name = "Amount")
     public int amount;
 
-    @Column(name = "Status", index = true)
-    public RsvpStatus status;
+    // 'not_replied', 'unsure', 'attending', or 'declined'
+    @Column(name = "RsvpStatus")
+    public String status;
 
     @Column(name = "Event", index = true)
     public Event event;
@@ -30,9 +24,8 @@ public class Rsvp extends Model {
         super();
     }
 
-    public Rsvp(String remoteId, int amount, RsvpStatus status, Event event, User user) {
+    public Rsvp(int amount, String status, Event event, User user) {
         super();
-        this.remoteId = remoteId;
         this.amount = amount;
         this.status = status;
         this.event = event;
