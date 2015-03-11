@@ -10,8 +10,6 @@ import com.paypal.psix.models.User;
 
 public class UserSession {
 
-    private static final String LOG_TAG = UserSession.class.getSimpleName();
-
     private static final String CUR_USER_FBID_KEY = "cur_user_fbid";
     private static final String CUR_USER_FIRST_NAME_KEY = "cur_user_first_name";
     private static final String CUR_USER_LAST_NAME_KEY = "cur_user_last_name";
@@ -39,10 +37,9 @@ public class UserSession {
         String fbId = getSharedPrefs().getString(CUR_USER_FBID_KEY, null);
         if (fbId != null) {
             return new User(
-                    fbId,
-                    getSharedPrefs().getString(CUR_USER_FIRST_NAME_KEY, null),
-                    getSharedPrefs().getString(CUR_USER_LAST_NAME_KEY, null),
-                    null
+                fbId,
+                getSharedPrefs().getString(CUR_USER_FIRST_NAME_KEY, null),
+                getSharedPrefs().getString(CUR_USER_LAST_NAME_KEY, null)
             );
         }
 
@@ -50,7 +47,7 @@ public class UserSession {
     }
 
     public static void setUser(GraphUser newUser) {
-        new UserSession(new User(newUser.getId(), newUser.getFirstName(), newUser.getLastName(), null));
+        new UserSession(new User(newUser.getId(), newUser.getFirstName(), newUser.getLastName()));
     }
 
     public static void userLoggedOut() {
