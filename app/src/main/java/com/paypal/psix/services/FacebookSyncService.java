@@ -95,14 +95,12 @@ public class FacebookSyncService {
         if (event == null) {
             event = new Event();
             event.fbEventId = fbEventId;
-            event.name = (String) obj.getProperty("name");
-
-            GraphObject coverURL = obj.getPropertyAs("cover", GraphObject.class);
-
-            event.imageURL = coverURL != null ? (String)coverURL.getProperty("source") : DEFAULT_EVENT_IMG;
-            event.timestamp = parseTimestampFromGraphObject(obj);
-            event.save();
         }
+        GraphObject coverURL = obj.getPropertyAs("cover", GraphObject.class);
+        event.imageURL = coverURL != null ? (String)coverURL.getProperty("source") : DEFAULT_EVENT_IMG;
+        event.name = (String) obj.getProperty("name");
+        event.timestamp = parseTimestampFromGraphObject(obj);
+        event.save();
         return event;
     }
 
