@@ -4,8 +4,6 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-import org.fluttercode.datafactory.impl.DataFactory;
-
 import java.util.List;
 
 @Table(name = "Users")
@@ -37,15 +35,6 @@ public class User extends Model {
         this.fbUserId = fbUserId;
         this.firstName = firstName;
         this.lastName = lastName;
-    }
-
-    public static User GenerateRandomUser() {
-        DataFactory df = new DataFactory();
-        User user = new User();
-        user.firstName = df.getFirstName();
-        user.lastName = df.getLastName();
-        user.save();
-        return user;
     }
 
     public String getAvatarURL() {
