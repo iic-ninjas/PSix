@@ -30,7 +30,7 @@ public class User extends Model {
         super();
     }
 
-    public User(String fbUserId, String firstName, String lastName, String avatarURL) {
+    public User(String fbUserId, String firstName, String lastName) {
         super();
         this.fbUserId = fbUserId;
         this.firstName = firstName;

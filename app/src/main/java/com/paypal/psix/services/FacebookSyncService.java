@@ -52,7 +52,6 @@ public class FacebookSyncService {
                 public void onCompleted(Response response) {
                     GraphObject mainObj = response.getGraphObject();
                     if (mainObj != null) {
-                        ArrayList<Event> events = new ArrayList<>();
                         GraphObjectList<GraphObject> objects = mainObj.getPropertyAsList("data", GraphObject.class);
                         for (GraphObject obj : objects) {
                             createRsvpFromGraphObject(obj, event);
@@ -77,20 +76,13 @@ public class FacebookSyncService {
 
         User user =  new Select().from(User.class).where("FbUserId = ?", fbId).executeSingle();;
         if (user == null) {
-            user = new User();
             String[] names = ((String)obj.getProperty("name")).split(" ");
-            user.fbUserId = fbId;
-            user.firstName = names[0];
-            user.lastName = names[0];
+            user = new User(fbId, names[0], names[1]);
             user.save();
         }
 
         Rsvp rsvp = new Select().from(Rsvp.class).where("User = ? AND Event = ?", user.getId(), event.getId()).executeSingle();
-        if (rsvp == null) {
-            rsvp = new Rsvp();
-            rsvp.event = event;
-            rsvp.user = user;
-        }
+        if (rsvp == null) rsvp = new Rsvp(event, user);
         rsvp.status = (String)obj.getProperty("rsvp_status");
         rsvp.save();
         return rsvp;

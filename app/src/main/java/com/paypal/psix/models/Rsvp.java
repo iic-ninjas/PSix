@@ -24,6 +24,10 @@ public class Rsvp extends Model {
         super();
     }
 
+    public Rsvp(Event event, User user) {
+        super(-1, "not_replied", event, user);
+    }
+
     public Rsvp(int amount, String status, Event event, User user) {
         super();
         this.amount = amount;
