@@ -100,6 +100,7 @@ public class FacebookSyncService {
         event.imageURL = coverURL != null ? (String)coverURL.getProperty("source") : DEFAULT_EVENT_IMG;
         event.name = (String) obj.getProperty("name");
         event.timestamp = parseTimestampFromGraphObject(obj);
+        event.organizer = UserSession.getUser();
         event.save();
         return event;
     }
