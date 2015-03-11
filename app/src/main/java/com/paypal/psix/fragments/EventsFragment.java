@@ -1,5 +1,6 @@
 package com.paypal.psix.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -35,10 +36,10 @@ public class EventsFragment extends Fragment implements FacebookSyncService.Even
     @InjectView(R.id.events_list_view) ListView listView;
 
     EventsAdapter adapter;
+    ProgressDialog progress;
     ArrayList<Event> data = new ArrayList<>();
 
-    public EventsFragment() {
-    }
+    public EventsFragment() { }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
@@ -57,7 +58,7 @@ public class EventsFragment extends Fragment implements FacebookSyncService.Even
             }
         });
 
-        FacebookSyncService.syncFacebookEvent(this);
+        sync();
 
         return rootView;
     }
@@ -92,8 +93,16 @@ public class EventsFragment extends Fragment implements FacebookSyncService.Even
         });
     }
 
+    private void sync() {
+        if (data.isEmpty()) {
+            progress = ProgressDialog.show(getActivity(), getString(R.string.please_wait), getString(R.string.fetching_events));
+        }
+        FacebookSyncService.syncFacebookEvent(this);
+    }
+
     @Override
     public void eventsSyncedCallback() {
+        if (progress != null) progress.dismiss();
         refreshDataSource();
         adapter.notifyDataSetChanged();
     }
