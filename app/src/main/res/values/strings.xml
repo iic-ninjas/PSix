@@ -35,4 +35,11 @@
     <string name="paymentes_added">Payments added successfully!</string>
     <string name="paymentes_adding_failed">Something went wrong...</string>
     <string name="title_share_activity">Share Payment</string>
+
+    <plurals
+        name="you_invited">
+        <item quantity="zero">You haven\'t invited anyone yet.</item>
+        <item quantity="one">You have invited one person.</item>
+        <item quantity="other">You have invited %d people.</item>
+    </plurals>
 </resources>

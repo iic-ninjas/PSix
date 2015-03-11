@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/you_invited"
-        android:id="@+id/event_number_of_invitees"
+        android:id="@+id/event_invitees"
         android:textColor="#ff363636"
         android:layout_marginBottom="10dp" />
 
