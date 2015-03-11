@@ -21,6 +21,8 @@ import java.util.Date;
 
 public class FacebookSyncService {
 
+    private static final String LOG_TAG = FacebookSyncService.class.getSimpleName();
+
     private static final String COMPLEX_FB_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
     private static final String SIMPLE_FB_DATE_FORMAT  = "yyyy-MM-dd";
     private static final String DEFAULT_EVENT_IMG = "http://wagner.wpengine.netdna-cdn.com/newsroom/wp-content/plugins/events-calendar-pro/resources/images/tribe-related-events-placeholder.png";
@@ -78,7 +80,9 @@ public class FacebookSyncService {
         User user =  new Select().from(User.class).where("FbUserId = ?", fbId).executeSingle();;
         if (user == null) {
             String[] names = ((String)obj.getProperty("name")).split(" ");
-            user = new User(fbId, names[0], names[1]);
+            String firstName = names[0];
+            String lastName = names.length == 2 ? names[1] : "";
+            user = new User(fbId, firstName, lastName);
             user.save();
         }
 
