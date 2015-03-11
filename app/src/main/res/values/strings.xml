@@ -45,4 +45,5 @@
     </plurals>
 
     <string name="onboarding_intro">Welcome</string>
+    <string name="onboaring_ext_intro">Plug-in awesome payments into your Facebook Events!</string>
 </resources>

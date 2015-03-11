@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="@color/main_color">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView"
+        android:layout_gravity="center"
+        android:src="@drawable/logo"
+        android:layout_weight="0.24"
+        android:scaleType="fitStart"
+        android:background="@color/main_color"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Facebook Events Payments"
+        android:id="@+id/textView2"
+        android:textColor="#ffffffff"
+        android:textSize="20dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:singleLine="false"
+        android:layout_alignParentStart="false"
+        android:layout_marginRight="25dp" />
+
+</RelativeLayout>
