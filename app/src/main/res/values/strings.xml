@@ -46,4 +46,7 @@
 
     <string name="onboarding_intro">Welcome</string>
     <string name="onboaring_ext_intro">Plug-in awesome payments into your Facebook Events!</string>
+    <string name="share_payment_link_title">Share Payment Link</string>
+    <string name="share_by_post">Share by post</string>
+    <string name="exit_share">Exit</string>
 </resources>

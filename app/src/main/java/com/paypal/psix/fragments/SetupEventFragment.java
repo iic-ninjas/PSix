@@ -1,7 +1,6 @@
 package com.paypal.psix.fragments;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,7 +16,6 @@ import android.widget.Toast;
 
 import com.paypal.psix.R;
 import com.paypal.psix.activities.SetupEventActivity;
-import com.paypal.psix.activities.ShareActivity;
 import com.paypal.psix.models.Event;
 import com.paypal.psix.utils.BusProvider;
 import com.squareup.otto.Bus;
@@ -120,9 +118,10 @@ public class SetupEventFragment extends Fragment {
                 event.setup();
                 bus.post(new SuccessNotification());
                 Toast.makeText(getActivity(), getActivity().getString(R.string.paymentes_added), Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getActivity(), ShareActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+                ShareDialogFragment.show(getActivity());
+//                Intent intent = new Intent(getActivity(), ShareActivity.class);
+//                startActivity(intent);
+//                getActivity().finish();
             } else {
                 Toast.makeText(getActivity(), getActivity().getString(R.string.paymentes_adding_failed), Toast.LENGTH_LONG).show();
             }
