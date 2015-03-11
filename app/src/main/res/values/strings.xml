@@ -43,4 +43,6 @@
         <item quantity="one">You have invited one person.</item>
         <item quantity="other">You have invited %d people.</item>
     </plurals>
+
+    <string name="onboarding_intro">Welcome</string>
 </resources>
