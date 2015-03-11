@@ -23,6 +23,7 @@ public class FacebookSyncService {
 
     private static final String COMPLEX_FB_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
     private static final String SIMPLE_FB_DATE_FORMAT  = "yyyy-MM-dd";
+    private static final String DEFAULT_EVENT_IMG = "http://wagner.wpengine.netdna-cdn.com/newsroom/wp-content/plugins/events-calendar-pro/resources/images/tribe-related-events-placeholder.png";
 
     public interface EventsSyncCallback {
         void eventsSyncedCallback();
@@ -95,7 +96,10 @@ public class FacebookSyncService {
             event = new Event();
             event.fbEventId = fbEventId;
             event.name = (String) obj.getProperty("name");
-            event.imageURL = (String) obj.getPropertyAs("cover", GraphObject.class).getProperty("source");
+
+            GraphObject coverURL = obj.getPropertyAs("cover", GraphObject.class);
+
+            event.imageURL = coverURL != null ? (String)coverURL.getProperty("source") : DEFAULT_EVENT_IMG;
             event.timestamp = parseTimestampFromGraphObject(obj);
             event.save();
         }

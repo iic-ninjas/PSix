@@ -22,7 +22,7 @@ import butterknife.InjectView;
  */
 public class EventsAdapter extends ArrayAdapter<Event> {
 
-    private static final int SETUPED_ICON_UNICODE = 0xf2f8;
+    private static final int SETUPED_ICON_UNICODE = 0xf251;
     private static final int NOT_SETUPED_ICON_UNICODE = 0xf2f7;
 
     static class ViewHolder {
