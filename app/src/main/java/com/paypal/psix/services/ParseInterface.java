@@ -13,6 +13,12 @@ public interface ParseInterface {
     static String APP_ID  = "3VYFRciY4tMgYwEwVYq2veNGbqq7CjJvQUp85IAo";
     static String API_KEY = "LTNEwupT7LOtVvWoVVVkFahN2H76oDU0qbEJSL3b";
 
+    // EVENT FETCHING
+
+
+
+    // EVENT CREATION
+
     @Headers({
         "X-Parse-Application-Id: " + APP_ID,
         "X-Parse-REST-API-Key: " + API_KEY,
@@ -38,6 +44,5 @@ public interface ParseInterface {
     }
 
     public class ParseEvent {
-
     }
 }
