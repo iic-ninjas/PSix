@@ -1,0 +1,1 @@
+ALTER TABLE Rsvps ADD COLUMN RsvpStatus TEXT;

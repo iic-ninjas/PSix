@@ -32,7 +32,18 @@
     <string name="you_invited">You invited 0 people.</string>
     <string name="please_wait">Please wait</string>
     <string name="pluging_in">Pluging-in your payments</string>
+    <string name="fetching_events">Fetching your events</string>
     <string name="paymentes_added">Payments added successfully!</string>
     <string name="paymentes_adding_failed">Something went wrong...</string>
     <string name="title_share_activity">Share Payment</string>
+
+    <plurals
+        name="you_invited">
+        <item quantity="zero">You haven\'t invited anyone yet.</item>
+        <item quantity="one">You have invited one person.</item>
+        <item quantity="other">You have invited %d people.</item>
+    </plurals>
+
+    <string name="onboarding_intro">Welcome</string>
+    <string name="onboaring_ext_intro">Plug-in awesome payments into your Facebook Events!</string>
 </resources>

@@ -1,13 +1,18 @@
 package com.paypal.psix.services;
 
+import com.activeandroid.query.Select;
 import com.facebook.Request;
+import com.facebook.RequestBatch;
 import com.facebook.Response;
 import com.facebook.model.GraphObject;
 import com.facebook.model.GraphObjectList;
 import com.paypal.psix.models.Event;
+import com.paypal.psix.models.Rsvp;
+import com.paypal.psix.models.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -28,21 +33,72 @@ public class FacebookSyncService {
             public void onCompleted(Response response) {
                 GraphObject mainObj = response.getGraphObject();
                 if (mainObj != null) {
+                    ArrayList<Event> events = new ArrayList<>();
                     GraphObjectList<GraphObject> objects = mainObj.getPropertyAsList("data", GraphObject.class);
-                    for (GraphObject obj : objects) createEventFromGraphObject(obj);
-                    callbackHandler.eventsSyncedCallback();
+                    for (GraphObject obj : objects) {
+                        Event event = createEventFromGraphObject(obj);
+                        events.add(event);
+                    }
+                    syncInviteesForEvents(events, callbackHandler);
                 }
             }
         });
     }
 
+    private static void syncInviteesForEvents(ArrayList<Event> events, final EventsSyncCallback callbackHandler) {
+        ArrayList<Request> requests = new ArrayList<>();
+        for (final Event event : events) {
+            requests.add(FacebookService.getInviteesForEventRequest(event.fbEventId, new Request.Callback() {
+                public void onCompleted(Response response) {
+                    GraphObject mainObj = response.getGraphObject();
+                    if (mainObj != null) {
+                        GraphObjectList<GraphObject> objects = mainObj.getPropertyAsList("data", GraphObject.class);
+                        for (GraphObject obj : objects) {
+                            createRsvpFromGraphObject(obj, event);
+                        }
+                    }
+                }
+            }));
+        }
+
+        RequestBatch requestBatch = new RequestBatch(requests);
+        requestBatch.addCallback(new com.facebook.RequestBatch.Callback() {
+            @Override
+            public void onBatchCompleted(RequestBatch batch) {
+                callbackHandler.eventsSyncedCallback();
+            }
+        });
+        requestBatch.executeAsync();
+    }
+
+    private static Rsvp createRsvpFromGraphObject(GraphObject obj, Event event) {
+        String fbId = (String) obj.getProperty("id");
+
+        User user =  new Select().from(User.class).where("FbUserId = ?", fbId).executeSingle();;
+        if (user == null) {
+            String[] names = ((String)obj.getProperty("name")).split(" ");
+            user = new User(fbId, names[0], names[1]);
+            user.save();
+        }
+
+        Rsvp rsvp = new Select().from(Rsvp.class).where("User = ? AND Event = ?", user.getId(), event.getId()).executeSingle();
+        if (rsvp == null) rsvp = new Rsvp(event, user);
+        rsvp.status = (String)obj.getProperty("rsvp_status");
+        rsvp.save();
+        return rsvp;
+    }
+
     private static Event createEventFromGraphObject(GraphObject obj) {
-        Event event = new Event();
-        event.fbEventId = (String)obj.getProperty("id");
-        event.name      = (String)obj.getProperty("name");
-        event.imageURL  = (String)obj.getPropertyAs("cover", GraphObject.class).getProperty("source");
-        event.timestamp = parseTimestampFromGraphObject(obj);
-        event.save();
+        String fbEventId = (String) obj.getProperty("id");
+        Event event = new Select().from(Event.class).where("FbEventId = ?", fbEventId).executeSingle();
+        if (event == null) {
+            event = new Event();
+            event.fbEventId = fbEventId;
+            event.name = (String) obj.getProperty("name");
+            event.imageURL = (String) obj.getPropertyAs("cover", GraphObject.class).getProperty("source");
+            event.timestamp = parseTimestampFromGraphObject(obj);
+            event.save();
+        }
         return event;
     }
 

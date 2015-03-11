@@ -80,6 +80,8 @@ public class Event extends Model {
         return this;
     }
 
+    public int getNumberOfInvitees() { return this.rsvps().size() - 1; }
+
     public Date getDate() {
         return new Date(timestamp);
     }

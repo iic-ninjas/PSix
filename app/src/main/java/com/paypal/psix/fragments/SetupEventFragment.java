@@ -37,6 +37,7 @@ public class SetupEventFragment extends Fragment {
     @InjectView(R.id.button_create_paymentLink) Button createPaymentLink;
     @InjectView(R.id.event_header_image) ImageView eventImageHeader;
     @InjectView(R.id.event_header_date) TextView eventDateHeader;
+    @InjectView(R.id.event_invitees) TextView eventInviteesDesc;
 
     Event event;
     ProgressDialog progress;
@@ -49,6 +50,10 @@ public class SetupEventFragment extends Fragment {
         event = ((SetupEventActivity)getActivity()).event;
         eventTitle.setText(event.name);
         eventDateHeader.setText(event.getFormattedDate());
+
+        int count = event.getNumberOfInvitees();
+        String quantityString = getResources().getQuantityString(R.plurals.you_invited, count, count);
+        eventInviteesDesc.setText(quantityString);
         Picasso.with(getActivity()).load(event.imageURL).into(eventImageHeader);
 
         return view;
