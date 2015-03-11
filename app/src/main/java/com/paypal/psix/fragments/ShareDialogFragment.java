@@ -25,7 +25,8 @@ public class ShareDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(getString(R.string.share_payment_link_title))
+        builder.setView(getActivity().getLayoutInflater().inflate(R.layout.fragment_share, null))
+                .setMessage(getString(R.string.share_payment_link_title))
                 .setPositiveButton(getString(R.string.exit_share), new DialogInterface.OnClickListener() {
                     // this is actually the negative one - you can't order them :(
                     public void onClick(DialogInterface dialog, int id) {
