@@ -50,4 +50,5 @@
     <string name="share_payment_link_title">Share Payment Link</string>
     <string name="share_by_post">Share by post</string>
     <string name="exit_share">Exit</string>
+    <string name="share_instructions">Share the link manually or post it in as a post in your event.</string>
 </resources>

@@ -27,19 +27,21 @@ public class ShareDialogFragment extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(getActivity().getLayoutInflater().inflate(R.layout.fragment_share, null))
-                .setMessage(getString(R.string.share_payment_link_title))
-                .setPositiveButton(getString(R.string.exit_share), new DialogInterface.OnClickListener() {
-                    // this is actually the negative one - you can't order them :(
-                    public void onClick(DialogInterface dialog, int id) {
-                        finishShareFlow();
-                    }
-                })
-                .setNegativeButton(getString(R.string.share_by_post), new DialogInterface.OnClickListener() {
-                    // this is the positive one
-                    public void onClick(DialogInterface dialog, int id) {
+            .setTitle(R.string.share_payment_link_title)
+            .setMessage(getString(R.string.share_instructions))
+            .setIcon(android.R.drawable.ic_menu_share)
+            .setPositiveButton(getString(R.string.exit_share), new DialogInterface.OnClickListener() {
+                // this is actually the negative one - you can't order them :(
+                public void onClick(DialogInterface dialog, int id) {
                     finishShareFlow();
-                    }
-                });
+                }
+            })
+            .setNegativeButton(getString(R.string.share_by_post), new DialogInterface.OnClickListener() {
+                // this is the positive one
+                public void onClick(DialogInterface dialog, int id) {
+                    finishShareFlow();
+                }
+            });
         return builder.create();
     }
 
