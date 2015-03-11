@@ -19,6 +19,8 @@ import com.paypal.psix.R;
 import com.paypal.psix.activities.SetupEventActivity;
 import com.paypal.psix.activities.ShareActivity;
 import com.paypal.psix.models.Event;
+import com.paypal.psix.utils.BusProvider;
+import com.squareup.otto.Bus;
 import com.squareup.picasso.Picasso;
 
 import butterknife.ButterKnife;
@@ -31,6 +33,9 @@ import butterknife.OnTextChanged;
  */
 public class SetupEventFragment extends Fragment {
 
+    public class SuccessNotification {
+    }
+
     @InjectView(R.id.event_name_text_view) TextView eventTitle;
     @InjectView(R.id.edit_payment_sum) EditText paymentSumText;
     @InjectView(R.id.edit_payment_reason) EditText paymentReasonText;
@@ -38,6 +43,8 @@ public class SetupEventFragment extends Fragment {
     @InjectView(R.id.event_header_image) ImageView eventImageHeader;
     @InjectView(R.id.event_header_date) TextView eventDateHeader;
     @InjectView(R.id.event_invitees) TextView eventInviteesDesc;
+
+    Bus bus = BusProvider.getInstance();
 
     Event event;
     ProgressDialog progress;
@@ -111,6 +118,7 @@ public class SetupEventFragment extends Fragment {
             progress.dismiss();
             if (result) {
                 event.setup();
+                bus.post(new SuccessNotification());
                 Toast.makeText(getActivity(), getActivity().getString(R.string.paymentes_added), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getActivity(), ShareActivity.class);
                 startActivity(intent);

@@ -17,6 +17,9 @@ import com.paypal.psix.activities.SetupEventActivity;
 import com.paypal.psix.adapters.EventsAdapter;
 import com.paypal.psix.models.Event;
 import com.paypal.psix.services.FacebookSyncService;
+import com.paypal.psix.utils.BusProvider;
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,6 +41,7 @@ public class EventsFragment extends Fragment implements FacebookSyncService.Even
     EventsAdapter adapter;
     ProgressDialog progress;
     ArrayList<Event> data = new ArrayList<>();
+    Bus bus = BusProvider.getInstance();
 
     public EventsFragment() { }
 
@@ -58,6 +62,7 @@ public class EventsFragment extends Fragment implements FacebookSyncService.Even
             }
         });
 
+        bus.register(this);
         sync();
 
         return rootView;
@@ -66,6 +71,7 @@ public class EventsFragment extends Fragment implements FacebookSyncService.Even
     @Override public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+        bus.unregister(this);
     }
 
     private void navigateToEvent(Event event) {
@@ -105,6 +111,12 @@ public class EventsFragment extends Fragment implements FacebookSyncService.Even
         if (progress != null) progress.dismiss();
         refreshDataSource();
         adapter.notifyDataSetChanged();
+    }
+
+
+    @Subscribe
+    public void answerAvailable(SetupEventFragment.SuccessNotification event) {
+        eventsSyncedCallback();
     }
 
 }
