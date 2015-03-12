@@ -88,7 +88,6 @@ public class SetupEventFragment extends Fragment {
                 progress.dismiss();
                 event.setup();
                 bus.post(new SuccessNotification());
-                Toast.makeText(getActivity(), getActivity().getString(R.string.paymentes_added), Toast.LENGTH_LONG).show();
                 ShareDialogFragment.show(getActivity());
             }
 

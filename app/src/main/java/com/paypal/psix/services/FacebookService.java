@@ -36,4 +36,16 @@ public class FacebookService {
             callback
         );
     }
+
+    public static void postInEvent(String fbEventId, String message, Request.Callback callback) {
+        Bundle params = new Bundle();
+        params.putString("message", message);
+        new Request(
+            Session.getActiveSession(),
+            "/" + fbEventId + "/feed",
+            params,
+            HttpMethod.POST,
+            callback
+        ).executeAsync();
+    }
 }

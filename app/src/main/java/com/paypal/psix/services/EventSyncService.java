@@ -16,7 +16,7 @@ public class EventSyncService {
     }
 
     public static void pluginEvent(final Event event, Callback<ParseInterface.ParseEvent> cb) {
-        client().createEvent(new ParseInterface.ParseEventCreateParams(event.fbEventId, event.organizer.fbUserId, event.paymentDescription, event.amountPerUser), cb);
+        client().createEvent(new ParseInterface.ParseEventCreateParams(event.fbEventId, UserSession.getUser().fbUserId, event.paymentDescription, event.amountPerUser), cb);
     }
 
     private static ParseInterface client() {
