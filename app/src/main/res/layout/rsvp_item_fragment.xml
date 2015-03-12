@@ -16,7 +16,7 @@
         <ImageView
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:id="@+id/profile_image"
+            android:id="@+id/rsvp_user_profile_image"
             android:padding="1dp"
             android:scaleType="fitXY"
             android:background="@drawable/border" />

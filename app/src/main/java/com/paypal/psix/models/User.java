@@ -40,4 +40,10 @@ public class User extends Model {
     public String getAvatarURL() {
         return "http://graph.facebook.com/" + this.fbUserId + "/picture?type=square";
     }
+
+    public String getFullName() {
+        String fullName = firstName;
+        if (lastName != null || lastName != "") fullName += " " + lastName;
+        return fullName;
+    }
 }
