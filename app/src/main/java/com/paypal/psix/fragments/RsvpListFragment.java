@@ -13,7 +13,6 @@ import com.paypal.psix.R;
 import com.paypal.psix.activities.EventStatusActivity;
 import com.paypal.psix.adapters.RsvpsAdapter;
 import com.paypal.psix.models.Event;
-import com.paypal.psix.models.Rsvp;
 
 import java.util.ArrayList;
 
@@ -29,7 +28,6 @@ public class RsvpListFragment extends Fragment {
     Event event;
     RsvpsAdapter adapter;
     ProgressDialog dialog;
-    ArrayList<Rsvp> data = new ArrayList<Rsvp>();
 
     public RsvpListFragment() {}
 
@@ -39,14 +37,10 @@ public class RsvpListFragment extends Fragment {
         ButterKnife.inject(this, rootView);
         event = ((EventStatusActivity)getActivity()).event;
 
-        refreshDataSource();
-        adapter = new RsvpsAdapter(getActivity(), data);
+        adapter = new RsvpsAdapter(getActivity(), new ArrayList<>(event.rsvps()));
+        rsvpListView.setAdapter(adapter);
 
         return rootView;
-    }
-
-    private void refreshDataSource() {
-        data.clear();
     }
 
     @Override
