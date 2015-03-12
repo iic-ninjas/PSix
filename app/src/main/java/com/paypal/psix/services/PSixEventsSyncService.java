@@ -15,13 +15,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import retrofit.Callback;
+import retrofit.RetrofitError;
+
 /**
  * Created by shay on 3/10/15.
  */
 
-public class FacebookSyncService {
+public class PSixEventsSyncService {
 
-    private static final String LOG_TAG = FacebookSyncService.class.getSimpleName();
+    private static final String LOG_TAG = PSixEventsSyncService.class.getSimpleName();
 
     private static final String COMPLEX_FB_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
     private static final String SIMPLE_FB_DATE_FORMAT  = "yyyy-MM-dd";
@@ -36,14 +39,40 @@ public class FacebookSyncService {
             public void onCompleted(Response response) {
                 GraphObject mainObj = response.getGraphObject();
                 if (mainObj != null) {
-                    ArrayList<Event> events = new ArrayList<>();
+                    final ArrayList<Event> events = new ArrayList<>();
                     GraphObjectList<GraphObject> objects = mainObj.getPropertyAsList("data", GraphObject.class);
                     for (GraphObject obj : objects) {
                         Event event = createEventFromGraphObject(obj);
                         events.add(event);
                     }
-                    syncInviteesForEvents(events, callbackHandler);
+
+                    syncEventsStatus(new EventsSyncCallback() {
+                        @Override
+                        public void eventsSyncedCallback() {
+                            syncInviteesForEvents(events, callbackHandler);
+                        }
+                    });
+
                 }
+            }
+        });
+    }
+
+    private static void syncEventsStatus(final EventsSyncCallback callbackHandler) {
+        ParseEventsSyncService.getEventsOfUser(UserSession.getUser(), new Callback<ParseAPI.ParseResults>() {
+
+            @Override
+            public void success(ParseAPI.ParseResults results, retrofit.client.Response response) {
+                for (ParseAPI.ParseEvent parseEvent : results.results) {
+                    Event event = new Select().from(Event.class).where("FbEventId = ?", parseEvent.fbId).executeSingle();
+                    if (event != null && !event.hasSetup) event.setup();
+                }
+                callbackHandler.eventsSyncedCallback();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                callbackHandler.eventsSyncedCallback();
             }
         });
     }

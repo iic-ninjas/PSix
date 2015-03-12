@@ -16,7 +16,7 @@ import com.paypal.psix.activities.EventStatusActivity;
 import com.paypal.psix.activities.SetupEventActivity;
 import com.paypal.psix.adapters.EventsAdapter;
 import com.paypal.psix.models.Event;
-import com.paypal.psix.services.FacebookSyncService;
+import com.paypal.psix.services.PSixEventsSyncService;
 import com.paypal.psix.utils.BusProvider;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
@@ -32,7 +32,7 @@ import butterknife.InjectView;
 /**
  * Created by shay on 3/3/15.
  */
-public class EventsFragment extends Fragment implements FacebookSyncService.EventsSyncCallback {
+public class EventsFragment extends Fragment implements PSixEventsSyncService.EventsSyncCallback {
 
     private static final String LOG_TAG = "Events";
 
@@ -103,7 +103,7 @@ public class EventsFragment extends Fragment implements FacebookSyncService.Even
         if (data.isEmpty()) {
             progress = ProgressDialog.show(getActivity(), getString(R.string.please_wait), getString(R.string.fetching_events));
         }
-        FacebookSyncService.syncFacebookEvent(this);
+        PSixEventsSyncService.syncFacebookEvent(this);
     }
 
     @Override

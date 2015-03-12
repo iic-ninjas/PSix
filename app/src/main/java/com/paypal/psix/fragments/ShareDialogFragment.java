@@ -69,7 +69,9 @@ public class ShareDialogFragment extends DialogFragment {
 
         urlTextField.setText(event.getShareURL());
 
-        return builder.create();
+        Dialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        return dialog;
     }
 
     @Override public void onDestroyView() {

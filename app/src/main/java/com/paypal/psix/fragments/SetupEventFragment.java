@@ -16,8 +16,8 @@ import android.widget.Toast;
 import com.paypal.psix.R;
 import com.paypal.psix.activities.SetupEventActivity;
 import com.paypal.psix.models.Event;
-import com.paypal.psix.services.EventSyncService;
-import com.paypal.psix.services.ParseInterface;
+import com.paypal.psix.services.ParseAPI;
+import com.paypal.psix.services.ParseEventsSyncService;
 import com.paypal.psix.utils.BusProvider;
 import com.squareup.otto.Bus;
 import com.squareup.picasso.Picasso;
@@ -82,9 +82,9 @@ public class SetupEventFragment extends Fragment {
         createPaymentLink.setFocusableInTouchMode(true);
         createPaymentLink.requestFocus();
 
-        EventSyncService.pluginEvent(event, new Callback<ParseInterface.ParseEvent>() {
+        ParseEventsSyncService.pluginEvent(event, new Callback<ParseAPI.ParseEvent>() {
             @Override
-            public void success(ParseInterface.ParseEvent parseEvent, Response response) {
+            public void success(ParseAPI.ParseEvent parseEvent, Response response) {
                 progress.dismiss();
                 event.setup();
                 bus.post(new SuccessNotification());
