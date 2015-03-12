@@ -1,5 +1,6 @@
 package com.paypal.psix.fragments;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -33,6 +34,7 @@ public class ShareDialogFragment extends DialogFragment {
     @InjectView(R.id.share_url) EditText urlTextField;
 
     Event event;
+    Activity activity;
 
     public static final String TAG = "Share";
 
@@ -43,10 +45,10 @@ public class ShareDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_share, null);
-        event = ((HasEvent)getActivity()).getEvent();
+        activity = getActivity();
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        View view = activity.getLayoutInflater().inflate(R.layout.fragment_share, null);
+        event = ((HasEvent)activity).getEvent();
         builder.setView(view)
             .setTitle(R.string.share_payment_link_title)
             .setMessage(getString(R.string.share_instructions))
@@ -77,12 +79,12 @@ public class ShareDialogFragment extends DialogFragment {
 
     @OnClick(R.id.share_copy_button)
     public void onCopy(Button button) {
-        ClipboardUtil.copy(getActivity(), getString(R.string.psix_share_url_tag), urlTextField.getText().toString());
-        Toast.makeText(getActivity(), getActivity().getString(R.string.share_copied), Toast.LENGTH_SHORT).show();
+        ClipboardUtil.copy(activity, getString(R.string.psix_share_url_tag), urlTextField.getText().toString());
+        Toast.makeText(activity, activity.getString(R.string.share_copied), Toast.LENGTH_SHORT).show();
     }
 
     private void onShare() {
-        FacebookService.postInEvent(event.fbEventId, event.getShareMessage(getActivity()), new Request.Callback() {
+        FacebookService.postInEvent(event.fbEventId, event.getShareMessage(activity), new Request.Callback() {
             @Override
             public void onCompleted(Response response) {
                 finishShareFlow();
@@ -98,8 +100,8 @@ public class ShareDialogFragment extends DialogFragment {
 
     private void finishShareFlow() {
         dismiss();
-        if (getActivity().getClass() == SetupEventActivity.class) {
-            getActivity().finish();
+        if (activity.getClass() == SetupEventActivity.class) {
+            activity.finish();
         }
     }
 
