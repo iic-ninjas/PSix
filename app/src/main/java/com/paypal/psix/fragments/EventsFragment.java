@@ -75,8 +75,8 @@ public class EventsFragment extends Fragment implements PSixEventsSyncService.Ev
     }
 
     private void navigateToEvent(Event event) {
-        Class<?> klass = event.hasSetup ? EventStatusActivity.class : SetupEventActivity.class;
-        Intent intent = new Intent(getActivity(), klass);
+        Class<?> nextActivityClass = event.hasSetup ? EventStatusActivity.class : SetupEventActivity.class;
+        Intent intent = new Intent(getActivity(), nextActivityClass);
         intent.putExtra(Event.TAG, event.getId());
         startActivity(intent);
     }
