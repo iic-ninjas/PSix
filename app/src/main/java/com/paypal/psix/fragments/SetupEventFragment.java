@@ -1,8 +1,6 @@
 package com.paypal.psix.fragments;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,19 +15,28 @@ import android.widget.Toast;
 
 import com.paypal.psix.R;
 import com.paypal.psix.activities.SetupEventActivity;
-import com.paypal.psix.activities.ShareActivity;
 import com.paypal.psix.models.Event;
+import com.paypal.psix.services.ParseAPI;
+import com.paypal.psix.services.ParseEventsSyncService;
+import com.paypal.psix.utils.BusProvider;
+import com.squareup.otto.Bus;
 import com.squareup.picasso.Picasso;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by benny on 3/3/15.
  */
 public class SetupEventFragment extends Fragment {
+
+    public class SuccessNotification {
+    }
 
     @InjectView(R.id.event_name_text_view) TextView eventTitle;
     @InjectView(R.id.edit_payment_sum) EditText paymentSumText;
@@ -38,6 +45,8 @@ public class SetupEventFragment extends Fragment {
     @InjectView(R.id.event_header_image) ImageView eventImageHeader;
     @InjectView(R.id.event_header_date) TextView eventDateHeader;
     @InjectView(R.id.event_invitees) TextView eventInviteesDesc;
+
+    Bus bus = BusProvider.getInstance();
 
     Event event;
     ProgressDialog progress;
@@ -59,10 +68,35 @@ public class SetupEventFragment extends Fragment {
         return view;
     }
 
-    //region Listeners
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
+
     @OnClick(R.id.button_create_paymentLink)
-    public void createPaymentLinkClicked(){
-        new CreatePaymentLinkTask().execute((Void)null);
+    public void createPaymentLinkClicked() {
+        event.amountPerUser = Integer.parseInt(paymentSumText.getText().toString());
+        event.paymentDescription = paymentReasonText.getText().toString();
+
+        progress = ProgressDialog.show(getActivity(), getString(R.string.please_wait), getString(R.string.pluging_in));
+        createPaymentLink.setFocusableInTouchMode(true);
+        createPaymentLink.requestFocus();
+
+        ParseEventsSyncService.pluginEvent(event, new Callback<ParseAPI.ParseEvent>() {
+            @Override
+            public void success(ParseAPI.ParseEvent parseEvent, Response response) {
+                progress.dismiss();
+                event.setup();
+                bus.post(new SuccessNotification());
+                ShareDialogFragment.show(getActivity());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                progress.dismiss();
+                Toast.makeText(getActivity(), getActivity().getString(R.string.paymentes_adding_failed), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @OnTextChanged(R.id.edit_payment_reason)
@@ -74,9 +108,7 @@ public class SetupEventFragment extends Fragment {
     public void paymentReasonChanged(){
         toggleCreateLinkButton();
     }
-    //endregion
 
-    //region PRIVATE
     private void toggleCreateLinkButton(){
         createPaymentLink.setEnabled(doesTextExist(paymentReasonText) && doesTextExist(paymentSumText));
     }
@@ -84,40 +116,4 @@ public class SetupEventFragment extends Fragment {
     private boolean doesTextExist(EditText editText){
         return editText.getText().toString().length() > 0;
     }
-    //endregion
-
-    class CreatePaymentLinkTask extends AsyncTask<Void, Void, Boolean> {
-
-        @Override
-        protected void onPreExecute() {
-            progress = ProgressDialog.show(getActivity(), getString(R.string.please_wait), getString(R.string.pluging_in));
-            createPaymentLink.setFocusableInTouchMode(true);
-            createPaymentLink.requestFocus();
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // Send request to server
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            progress.dismiss();
-            if (result) {
-                Toast.makeText(getActivity(), getActivity().getString(R.string.paymentes_added), Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getActivity(), ShareActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            } else {
-                Toast.makeText(getActivity(), getActivity().getString(R.string.paymentes_adding_failed), Toast.LENGTH_LONG).show();
-            }
-
-        }
-    };
 }

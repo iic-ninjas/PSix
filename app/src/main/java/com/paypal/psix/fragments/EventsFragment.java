@@ -16,7 +16,10 @@ import com.paypal.psix.activities.EventStatusActivity;
 import com.paypal.psix.activities.SetupEventActivity;
 import com.paypal.psix.adapters.EventsAdapter;
 import com.paypal.psix.models.Event;
-import com.paypal.psix.services.FacebookSyncService;
+import com.paypal.psix.services.PSixEventsSyncService;
+import com.paypal.psix.utils.BusProvider;
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +32,7 @@ import butterknife.InjectView;
 /**
  * Created by shay on 3/3/15.
  */
-public class EventsFragment extends Fragment implements FacebookSyncService.EventsSyncCallback {
+public class EventsFragment extends Fragment implements PSixEventsSyncService.EventsSyncCallback {
 
     private static final String LOG_TAG = "Events";
 
@@ -38,6 +41,7 @@ public class EventsFragment extends Fragment implements FacebookSyncService.Even
     EventsAdapter adapter;
     ProgressDialog progress;
     ArrayList<Event> data = new ArrayList<>();
+    Bus bus = BusProvider.getInstance();
 
     public EventsFragment() { }
 
@@ -58,6 +62,7 @@ public class EventsFragment extends Fragment implements FacebookSyncService.Even
             }
         });
 
+        bus.register(this);
         sync();
 
         return rootView;
@@ -66,6 +71,7 @@ public class EventsFragment extends Fragment implements FacebookSyncService.Even
     @Override public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+        bus.unregister(this);
     }
 
     private void navigateToEvent(Event event) {
@@ -97,7 +103,7 @@ public class EventsFragment extends Fragment implements FacebookSyncService.Even
         if (data.isEmpty()) {
             progress = ProgressDialog.show(getActivity(), getString(R.string.please_wait), getString(R.string.fetching_events));
         }
-        FacebookSyncService.syncFacebookEvent(this);
+        PSixEventsSyncService.syncFacebookEvent(this);
     }
 
     @Override
@@ -105,6 +111,12 @@ public class EventsFragment extends Fragment implements FacebookSyncService.Even
         if (progress != null) progress.dismiss();
         refreshDataSource();
         adapter.notifyDataSetChanged();
+    }
+
+
+    @Subscribe
+    public void answerAvailable(SetupEventFragment.SuccessNotification event) {
+        eventsSyncedCallback();
     }
 
 }

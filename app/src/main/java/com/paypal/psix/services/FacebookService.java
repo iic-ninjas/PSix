@@ -16,10 +16,11 @@ public class FacebookService {
     public static void getUserCreatedFutureEvents(Request.Callback callback) {
         Bundle params = new Bundle();
         params.putString("fields", FB_EVENT_FIELDS);
+        params.putString("since", Long.toString(System.currentTimeMillis() / 1000L));
 
         new Request(
             Session.getActiveSession(),
-            "/me/events",
+            "/me/events/created",
             params,
             HttpMethod.GET,
             callback
@@ -34,5 +35,17 @@ public class FacebookService {
             HttpMethod.GET,
             callback
         );
+    }
+
+    public static void postInEvent(String fbEventId, String message, Request.Callback callback) {
+        Bundle params = new Bundle();
+        params.putString("message", message);
+        new Request(
+            Session.getActiveSession(),
+            "/" + fbEventId + "/feed",
+            params,
+            HttpMethod.POST,
+            callback
+        ).executeAsync();
     }
 }
