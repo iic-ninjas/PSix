@@ -36,6 +36,7 @@
     <string name="fetching_events">Fetching your events</string>
     <string name="paymentes_adding_failed">Something went wrong...</string>
     <string name="share_copied">URL Copied</string>
+    <string name="shared">Shared Successfully</string>
     <string name="title_share_activity">Share Payment</string>
 
     <plurals
