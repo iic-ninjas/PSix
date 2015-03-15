@@ -54,7 +54,6 @@ public class RsvpsAdapter extends ArrayAdapter<Rsvp> {
         holder.userNameLabel.setText(rsvp.user.getFullName());
         holder.rsvpStatusLabel.setText(rsvp.getFormattedStatus());
         holder.paymentSumLabel.setText(rsvp.hasPaid() ? rsvp.getFormattedAmount() : "");
-        Log.d(LOG_TAG, "user avatar url: " + rsvp.user.getAvatarURL());
         Picasso.with(getContext()).load(rsvp.user.getAvatarURL()).into(holder.profileImageView);
 
         return view;
