@@ -49,7 +49,7 @@
     <string name="onboaring_ext_intro">Plug-in awesome payments into your Facebook Events!</string>
     <string name="share_payment_link_title">Share Payment Link</string>
     <string name="share_by_post">Share by post</string>
-    <string name="exit_share">Exit</string>
+    <string name="exit_share">Continue</string>
     <string name="share_instructions">Share the link manually or post it in as a post in your event.</string>
     <string name="psix_share_url_tag">PSix Share URL</string>
 
