@@ -19,6 +19,7 @@ import com.paypal.psix.activities.EventsActivity;
 import com.paypal.psix.services.UserSession;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -26,6 +27,8 @@ public class OnboardingFragment extends Fragment {
 
     private static final String LOG_TAG = OnboardingFragment.class.getSimpleName();
     private static final List<String> PERMISSIONS = Arrays.asList("public_profile", "user_events");
+    private static final List<String> PUBLISH_PERMISSIONS = Arrays.asList("publish_actions");
+    private boolean pendingPublishReauthorization = false;
 
     private LoginButton loginButton;
     private UiLifecycleHelper uiHelper;
@@ -74,10 +77,6 @@ public class OnboardingFragment extends Fragment {
         if (user != null) {
             Log.d(LOG_TAG, "User logged in");
             UserSession.setUser(user);
-            this.getActivity().finish();
-            this.getActivity().startActivity(
-                    new Intent(this.getActivity(), EventsActivity.class)
-            );
         } else {
             Log.d(LOG_TAG, "Current user is null");
             if (UserSession.isUserSignedIn()) {
@@ -103,6 +102,34 @@ public class OnboardingFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         uiHelper.onActivityResult(requestCode, resultCode, data);
+
+        Session session = Session.getActiveSession();
+
+        if (session != null) {
+            List<String> permissions = session.getPermissions();
+            if (!isSubsetOf(PUBLISH_PERMISSIONS, permissions)) {
+                pendingPublishReauthorization = true;
+                Session.NewPermissionsRequest newPermissionsRequest = new Session.NewPermissionsRequest(
+                        this, PUBLISH_PERMISSIONS);
+                session.requestNewPublishPermissions(newPermissionsRequest);
+                return;
+            } else {
+                this.getActivity().finish();
+                this.getActivity().startActivity(
+                        new Intent(this.getActivity(), EventsActivity.class)
+                );
+            }
+        }
+    }
+
+    private boolean isSubsetOf(Collection<String> subset,
+                               Collection<String> superset) {
+        for (String string : subset) {
+            if (!superset.contains(string)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void onSessionStateChange(Session session, SessionState state, Exception e) {}

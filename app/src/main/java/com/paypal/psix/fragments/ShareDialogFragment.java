@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.facebook.Request;
 import com.facebook.Response;
-import com.facebook.Session;
 import com.paypal.psix.R;
 import com.paypal.psix.activities.SetupEventActivity;
 import com.paypal.psix.models.Event;
@@ -92,29 +91,12 @@ public class ShareDialogFragment extends DialogFragment {
                 finishShareFlow();
             }
         });
-//        requestSharePermissions(new Session.StatusCallback() {
-//            @Override
-//            public void call(Session session, SessionState sessionState, Exception e) {
-//
-//            }
-//        });
     }
 
     private void finishShareFlow() {
         dismiss();
         if (activity.getClass() == SetupEventActivity.class) {
             activity.finish();
-        }
-    }
-
-    private void requestSharePermissions(Session.StatusCallback cb) {
-        Session session = Session.getActiveSession();
-        if (session != null) {
-            Session.NewPermissionsRequest newPermissionsRequest = new Session.NewPermissionsRequest(
-                    this, "publish_actions");
-            newPermissionsRequest.setCallback(cb);
-            session.addCallback(cb);
-            session.requestNewPublishPermissions(newPermissionsRequest);
         }
     }
 }
