@@ -35,4 +35,23 @@ public class Rsvp extends Model {
         this.event = event;
         this.user = user;
     }
+
+    public String getFormattedStatus() {
+        String[] splitted = status.toLowerCase().split("_");
+        StringBuffer formattedStatus = new StringBuffer();
+        for(String word : splitted) {
+            formattedStatus
+                    .append(Character.toUpperCase(word.charAt(0)) + word.substring(1))
+                    .append(" ");
+        }
+        return formattedStatus.toString().trim();
+    }
+
+    public String getFormattedAmount() {
+        return String.format("$%d", amount);
+    }
+
+    public boolean hasPaid() {
+        return amount != -1;
+    }
 }

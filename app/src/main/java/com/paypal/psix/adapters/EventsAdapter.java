@@ -1,6 +1,7 @@
 package com.paypal.psix.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,8 @@ import butterknife.InjectView;
  * Created by shay on 3/3/15.
  */
 public class EventsAdapter extends ArrayAdapter<Event> {
+
+    private static final String LOG_TAG = EventsAdapter.class.getSimpleName();
 
     private static final int SETUPED_ICON_UNICODE = 0xf251;
     private static final int NOT_SETUPED_ICON_UNICODE = 0xf2f7;
@@ -61,6 +64,7 @@ public class EventsAdapter extends ArrayAdapter<Event> {
 
         holder.titleLabel.setText(event.name);
         holder.dateLabel.setText(event.getShortFormattedDate());
+        Log.d(LOG_TAG, "event image url: " + event.imageURL);
         Picasso.with(getContext()).load(event.imageURL).into(holder.imageView);
 
         int iconUnicode = event.hasSetup ? SETUPED_ICON_UNICODE : NOT_SETUPED_ICON_UNICODE;
