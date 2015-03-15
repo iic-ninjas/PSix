@@ -41,14 +41,14 @@ public class User extends Model {
 
     public String getAvatarURL() {
         Uri.Builder avatarUrlBuilder = new Uri.Builder();
-        avatarUrlBuilder.scheme("http")
+        avatarUrlBuilder.scheme("https")
                 .authority("graph.facebook.com")
                 .appendPath(this.fbUserId)
                 .appendPath("picture")
                 .appendQueryParameter("type", "square")
                 .appendQueryParameter("height", "128")
                 .appendQueryParameter("width", "128")
-                .appendQueryParameter("redirect", "false");
+                .appendQueryParameter("redirect", "true");
         return avatarUrlBuilder.toString();
     }
 
