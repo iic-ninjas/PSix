@@ -102,6 +102,7 @@ public class OnboardingFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         uiHelper.onActivityResult(requestCode, resultCode, data);
+        loginButton.setVisibility(View.INVISIBLE);
 
         Session session = Session.getActiveSession();
 
