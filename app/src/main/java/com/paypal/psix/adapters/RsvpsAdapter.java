@@ -1,6 +1,7 @@
 package com.paypal.psix.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.paypal.psix.R;
 import com.paypal.psix.models.Rsvp;
 import com.squareup.picasso.Picasso;
+
 
 import java.util.ArrayList;
 
@@ -44,17 +46,22 @@ public class RsvpsAdapter extends ArrayAdapter<Rsvp> {
         if (view != null) {
             holder = (ViewHolder)view.getTag();
         } else {
-            view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_rsvp_list, parent, false);
+            view = LayoutInflater.from(getContext()).inflate(R.layout.rsvp_item_fragment, parent, false);
             holder = new ViewHolder(view);
             view.setTag(holder);
         }
 
         holder.userNameLabel.setText(rsvp.user.getFullName());
-        holder.rsvpStatusLabel.setText(rsvp.status);
-        holder.paymentSumLabel.setText(rsvp.amount);
+        holder.rsvpStatusLabel.setText(rsvp.getFormattedStatus());
+        holder.paymentSumLabel.setText(rsvp.hasPaid() ? rsvp.getFormattedAmount() : "");
+        Log.d(LOG_TAG, "user avatar url: " + rsvp.user.getAvatarURL());
         Picasso.with(getContext()).load(rsvp.user.getAvatarURL()).into(holder.profileImageView);
 
         return view;
     }
 
+    @Override
+    public boolean isEnabled(int position) {
+        return false;
+    }
 }
