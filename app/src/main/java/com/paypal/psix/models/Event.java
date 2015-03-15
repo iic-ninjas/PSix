@@ -18,7 +18,8 @@ import java.util.List;
 public class Event extends Model {
 
     public static final String TAG = "Events";
-    public static final String SHARE_URL_BASE = "psix.parseapp.com/";
+    public static final String SHARE_URL_BASE = "psix.parseapp.com?e=";
+    public static final String ADDITION_TO_URL = "&u=";
 
     @Column(name = "FbEventId", unique = true, onUniqueConflict = Column.ConflictAction.IGNORE)
     public String fbEventId;
@@ -84,7 +85,13 @@ public class Event extends Model {
         return this;
     }
 
-    public String getShareURL() { return SHARE_URL_BASE + this.fbEventId; }
+    public Event desetup() {
+        this.hasSetup = false;
+        this.save();
+        return this;
+    }
+
+    public String getShareURL() { return SHARE_URL_BASE + this.fbEventId + ADDITION_TO_URL + this.organizer.fbUserId; }
 
     public String getShareMessage(Context context) {
         return String.format(context.getString(R.string.share_message), paymentDescription, amountPerUser, getShareURL());

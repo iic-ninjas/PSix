@@ -17,7 +17,7 @@ public class ParseEventsSyncService {
     }
 
     public static void pluginEvent(final Event event, Callback<ParseAPI.ParseEvent> cb) {
-        client().createEvent(new ParseAPI.ParseEventCreateParams(event.fbEventId, UserSession.getUser().fbUserId, event.paymentDescription, event.amountPerUser), cb);
+        client().createEvent(new ParseAPI.ParseEventCreateParams(event.fbEventId, UserSession.getUser().fbUserId, event.paymentDescription, event.name, event.amountPerUser), cb);
     }
 
     private static ParseAPI client() {

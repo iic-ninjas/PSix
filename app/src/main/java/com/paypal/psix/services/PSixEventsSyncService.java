@@ -65,7 +65,11 @@ public class PSixEventsSyncService {
             public void success(ParseAPI.ParseResults results, retrofit.client.Response response) {
                 for (ParseAPI.ParseEvent parseEvent : results.results) {
                     Event event = new Select().from(Event.class).where("FbEventId = ?", parseEvent.fbId).executeSingle();
-                    if (event != null && !event.hasSetup) event.setup();
+                    if (event != null) {
+                        event.setup();
+                    } else {
+                        event.desetup();
+                    }
                 }
                 callbackHandler.eventsSyncedCallback();
             }

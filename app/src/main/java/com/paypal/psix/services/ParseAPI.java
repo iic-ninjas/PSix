@@ -43,12 +43,14 @@ public interface ParseAPI {
         public String fbId;
         public String fbUserId;
         public String description;
+        public String name;
         public int amountPer;
 
-        public ParseEventCreateParams(String fbId, String fbUserId, String description, int amountPer) {
+        public ParseEventCreateParams(String fbId, String fbUserId, String description, String name, int amountPer) {
             this.fbId = fbId;
             this.fbUserId = fbUserId;
             this.description = description;
+            this.name = name;
             this.amountPer = amountPer;
         }
 
