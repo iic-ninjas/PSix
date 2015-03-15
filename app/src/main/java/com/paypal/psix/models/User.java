@@ -1,5 +1,7 @@
 package com.paypal.psix.models;
 
+import android.net.Uri;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -38,7 +40,16 @@ public class User extends Model {
     }
 
     public String getAvatarURL() {
-        return "http://graph.facebook.com/" + this.fbUserId + "/picture?type=square";
+        Uri.Builder avatarUrlBuilder = new Uri.Builder();
+        avatarUrlBuilder.scheme("http")
+                .authority("graph.facebook.com")
+                .appendPath(this.fbUserId)
+                .appendPath("picture")
+                .appendQueryParameter("type", "square")
+                .appendQueryParameter("height", "128")
+                .appendQueryParameter("width", "128")
+                .appendQueryParameter("redirect", "false");
+        return avatarUrlBuilder.toString();
     }
 
     public String getFullName() {
