@@ -1,11 +1,14 @@
 package com.paypal.psix.services;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
 import com.facebook.FacebookRequestError;
+import com.facebook.Session;
 import com.facebook.model.GraphUser;
 import com.paypal.psix.PSixApplication;
+import com.paypal.psix.activities.OnboardingActivity;
 import com.paypal.psix.models.User;
 
 public class UserSession {
@@ -50,13 +53,19 @@ public class UserSession {
         new UserSession(new User(newUser.getId(), newUser.getFirstName(), newUser.getLastName()));
     }
 
-    public static void userLoggedOut() {
+    public static void logout(Activity activity) {
         sessionInstance = null;
         SharedPreferences.Editor editor = getSharedPrefs().edit();
         editor.remove(CUR_USER_FBID_KEY);
         editor.remove(CUR_USER_FIRST_NAME_KEY);
         editor.remove(CUR_USER_LAST_NAME_KEY);
         editor.apply();
+
+        Session.getActiveSession().closeAndClearTokenInformation();
+
+        Intent intent = new Intent(activity, OnboardingActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        activity.startActivity(intent);
     }
 
     private static UserSession sessionInstance;
