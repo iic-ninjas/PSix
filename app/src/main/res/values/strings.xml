@@ -55,4 +55,5 @@
     <string name="psix_share_url_tag">PSix Share URL</string>
 
     <string name="share_message">%1$s.\u000APayment per attendee: $%2$d.\u000APay through this link: %3$s.\u000A\u000APayments plugged-in using #psix - Awesome Facebook Events Payments.</string>
+    <string name="label_empty_events">You have no future events</string>
 </resources>
