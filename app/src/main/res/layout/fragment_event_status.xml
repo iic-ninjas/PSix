@@ -8,7 +8,78 @@
 
     <include layout="@layout/event_header"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Per attendee:"
+                android:id="@+id/per_attendee_label"
+                android:layout_marginRight="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$0"
+                android:id="@+id/per_attendee_amount"
+                android:layout_weight="1"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Collected:"
+                android:id="@+id/money_collected_label"
+                android:layout_gravity="right"
+                android:layout_marginRight="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$0 of $0"
+                android:id="@+id/money_collected_amount"
+                android:textStyle="bold"
+                android:layout_gravity="right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Paid:"
+                android:id="@+id/paid_label"
+                android:layout_marginRight="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 of 0 attending"
+                android:id="@+id/paid_status"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/rsvp_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
-

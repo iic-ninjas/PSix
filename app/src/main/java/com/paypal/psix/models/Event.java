@@ -96,6 +96,13 @@ public class Event extends Model {
         return String.format(context.getString(R.string.share_message), paymentDescription, amountPerUser, getShareURL());
     }
 
+    public List<Rsvp> getAttendingGuests() {
+        return new Select()
+                .from(Rsvp.class)
+                .where("Event = ? AND RsvpStatus = 'attending'", this.getId())
+                .execute();
+    }
+
     public int getNumberOfInvitees() { return this.rsvps().size() - 1; }
 
     public Date getDate() {
