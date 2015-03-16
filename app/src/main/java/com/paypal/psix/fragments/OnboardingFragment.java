@@ -77,12 +77,6 @@ public class OnboardingFragment extends Fragment {
         if (user != null) {
             Log.d(LOG_TAG, "User logged in");
             UserSession.setUser(user);
-        } else {
-            Log.d(LOG_TAG, "Current user is null");
-            if (UserSession.isUserSignedIn()) {
-                UserSession.userLoggedOut();
-                Log.d(LOG_TAG, "User logged out");
-            }
         }
     }
 
