@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.activeandroid.query.Select;
 import com.paypal.psix.R;
@@ -37,6 +38,7 @@ public class EventsFragment extends Fragment implements PSixEventsSyncService.Ev
     private static final String LOG_TAG = "Events";
 
     @InjectView(R.id.events_list_view) ListView listView;
+    @InjectView(R.id.empty_event_list) TextView emptyView;
 
     EventsAdapter adapter;
     ProgressDialog progress;
@@ -52,7 +54,9 @@ public class EventsFragment extends Fragment implements PSixEventsSyncService.Ev
         ButterKnife.inject(this, rootView);
 
         refreshDataSource();
+
         adapter = new EventsAdapter(getActivity(), data);
+        listView.setEmptyView(emptyView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

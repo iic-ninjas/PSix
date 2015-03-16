@@ -46,13 +46,16 @@ public class PSixEventsSyncService {
                         events.add(event);
                     }
 
-                    syncEventsStatus(new EventsSyncCallback() {
-                        @Override
-                        public void eventsSyncedCallback() {
-                            syncInviteesForEvents(events, callbackHandler);
-                        }
-                    });
-
+                    if (events.size() > 0) {
+                        syncEventsStatus(new EventsSyncCallback() {
+                            @Override
+                            public void eventsSyncedCallback() {
+                                syncInviteesForEvents(events, callbackHandler);
+                            }
+                        });
+                    } else {
+                        callbackHandler.eventsSyncedCallback();
+                    }
                 }
             }
         });
