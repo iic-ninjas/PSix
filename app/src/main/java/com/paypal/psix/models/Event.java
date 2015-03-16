@@ -29,6 +29,9 @@ public class Event extends Model {
     @Column(name = "Name")
     public String name;
 
+    @Column(name = "description")
+    public String description;
+
     @Column(name = "ShareURL")
     public String shareURL;
 
@@ -65,11 +68,12 @@ public class Event extends Model {
         return event;
     }
 
-    public Event(String fbEventId, User organizer, String name, String shareURL, String imageURL, int amountPerUser, String paymentDescription, int timestamp, boolean hasSetup) {
+    public Event(String fbEventId, User organizer, String name, String description, String shareURL, String imageURL, int amountPerUser, String paymentDescription, int timestamp, boolean hasSetup) {
         super();
         this.fbEventId = fbEventId;
         this.organizer = organizer;
         this.name = name;
+        this.description = description;
         this.amountPerUser = amountPerUser;
         this.paymentDescription = paymentDescription;
         this.shareURL = shareURL;

@@ -139,6 +139,7 @@ public class PSixEventsSyncService {
         GraphObject coverURL = obj.getPropertyAs("cover", GraphObject.class);
         event.imageURL = coverURL != null ? (String)coverURL.getProperty("source") : DEFAULT_EVENT_IMG;
         event.name = (String) obj.getProperty("name");
+        event.description = (String) obj.getProperty("description");
         event.timestamp = parseTimestampFromGraphObject(obj);
         event.organizer = UserSession.getUser();
         event.save();

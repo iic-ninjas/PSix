@@ -8,7 +8,7 @@ import com.facebook.Session;
 
 public class FacebookService {
 
-    private static String FB_EVENT_FIELDS = "cover,name,id,start_time";
+    private static String FB_EVENT_FIELDS = "cover,name,id,start_time,description";
 
     public static void getUserCreatedFutureEvents(Request.Callback callback) {
         Bundle params = new Bundle();
