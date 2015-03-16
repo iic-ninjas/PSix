@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import com.activeandroid.query.Delete;
 import com.facebook.FacebookRequestError;
 import com.facebook.Session;
 import com.facebook.model.GraphUser;
 import com.paypal.psix.PSixApplication;
 import com.paypal.psix.activities.OnboardingActivity;
+import com.paypal.psix.models.Event;
+import com.paypal.psix.models.Rsvp;
 import com.paypal.psix.models.User;
 
 public class UserSession {
@@ -54,6 +57,10 @@ public class UserSession {
     }
 
     public static void logout(Activity activity) {
+        new Delete().from(Event.class).execute();
+        new Delete().from(User.class).execute();
+        new Delete().from(Rsvp.class).execute();
+
         sessionInstance = null;
         SharedPreferences.Editor editor = getSharedPrefs().edit();
         editor.remove(CUR_USER_FBID_KEY);
@@ -61,7 +68,10 @@ public class UserSession {
         editor.remove(CUR_USER_LAST_NAME_KEY);
         editor.apply();
 
-        Session.getActiveSession().closeAndClearTokenInformation();
+        Session session = Session.getActiveSession();
+        if (session != null) {
+          session.closeAndClearTokenInformation();
+        }
 
         Intent intent = new Intent(activity, OnboardingActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

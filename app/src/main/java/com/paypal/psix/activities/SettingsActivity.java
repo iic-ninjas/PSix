@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.paypal.psix.R;
+import com.paypal.psix.services.UserSession;
 import com.paypal.psix.utils.EmailValidator;
 
 public class SettingsActivity extends PreferenceActivity
@@ -81,6 +82,7 @@ public class SettingsActivity extends PreferenceActivity
 
     private void signOut() {
         Toast.makeText(SettingsActivity.this, getString(R.string.toast_sign_out), Toast.LENGTH_SHORT).show();
+        UserSession.logout(this);
     }
 
     private void fadeOutSettings() {

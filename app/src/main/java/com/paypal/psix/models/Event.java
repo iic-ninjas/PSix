@@ -23,7 +23,7 @@ public class Event extends Model {
     @Column(name = "FbEventId", unique = true, onUniqueConflict = Column.ConflictAction.IGNORE)
     public String fbEventId;
 
-    @Column(name = "Organizer", index = true)
+    @Column(name = "Organizer", index = true, onDelete = Column.ForeignKeyAction.CASCADE)
     public User organizer;
 
     @Column(name = "Name")

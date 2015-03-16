@@ -14,10 +14,10 @@ public class Rsvp extends Model {
     @Column(name = "RsvpStatus")
     public String status;
 
-    @Column(name = "Event", index = true)
+    @Column(name = "Event", index = true, onDelete = Column.ForeignKeyAction.CASCADE)
     public Event event;
 
-    @Column(name = "User", index = true)
+    @Column(name = "User", index = true, onDelete = Column.ForeignKeyAction.CASCADE)
     public User user;
 
     public Rsvp() {
