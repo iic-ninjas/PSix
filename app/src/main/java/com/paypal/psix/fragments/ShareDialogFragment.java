@@ -88,7 +88,11 @@ public class ShareDialogFragment extends DialogFragment {
         FacebookService.postInEvent(event.fbEventId, event.getShareMessage(activity), new Request.Callback() {
             @Override
             public void onCompleted(Response response) {
-                Toast.makeText(activity, activity.getString(R.string.shared), Toast.LENGTH_LONG).show();
+                if (response.getError() != null) {
+                    Toast.makeText(activity, response.getError().getErrorMessage(), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(activity, activity.getString(R.string.shared), Toast.LENGTH_LONG).show();
+                }
                 finishShareFlow();
             }
         });
