@@ -6,6 +6,65 @@
     android:clipChildren="false"
     android:minHeight="?android:attr/listPreferredItemHeight">
 
+    <LinearLayout
+    android:background="@drawable/container_dropshadow"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:id="@+id/event_item_image"
+            android:background="@drawable/border"
+            android:scaleType="fitXY"
+            android:clipChildren="false"
+            android:padding="1dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/event_item_title"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Test"
+                android:layout_marginTop="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/event_item_desc"
+                android:text="Event description" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="3">
+
+            <be.webelite.ion.IconView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                ioniconview:name="ion_android_settings"
+                android:id="@+id/event_item_action_icon"
+                android:gravity="center"
+                android:textSize="24dp"
+                android:textColor="#000" />
+        </LinearLayout>
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,64 +79,5 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="2dp"/>
-
-<LinearLayout
-android:background="@drawable/container_dropshadow"
-android:orientation="horizontal"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:padding="10dp">
-
-<ImageView
-    android:layout_width="64dp"
-    android:layout_height="64dp"
-    android:id="@+id/event_item_image"
-    android:background="@drawable/border"
-    android:scaleType="fitXY"
-    android:clipChildren="false"
-    android:padding="1dp" />
-
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:layout_marginLeft="12dp"
-    android:layout_weight="1">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/event_item_title"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:text="Test"
-        android:layout_marginTop="2dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/event_item_desc"
-        android:text="Event description" />
-</LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="3">
-
-        <be.webelite.ion.IconView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            ioniconview:name="ion_android_settings"
-            android:id="@+id/event_item_action_icon"
-            android:gravity="center"
-            android:textSize="24dp"
-            android:textColor="#000" />
-    </LinearLayout>
-
-</LinearLayout>
 
 </RelativeLayout>
