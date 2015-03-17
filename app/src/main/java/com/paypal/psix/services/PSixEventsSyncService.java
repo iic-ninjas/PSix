@@ -70,9 +70,7 @@ public class PSixEventsSyncService {
                     Event event = new Select().from(Event.class).where("FbEventId = ?", parseEvent.fbId).executeSingle();
                     if (event != null) {
                         event.setup();
-                    } else {
-                        event.desetup();
-                    }
+                    } 
                 }
                 callbackHandler.eventsSyncedCallback();
             }
