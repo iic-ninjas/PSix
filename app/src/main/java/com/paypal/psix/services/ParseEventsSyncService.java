@@ -11,7 +11,12 @@ import retrofit.RestAdapter;
  */
 public class ParseEventsSyncService {
 
-    public static void getEventsOfUser(User user, Callback<ParseAPI.ParseResults> cb) {
+    public static void getPaymentsPerEvent(Event event, Callback<ParseAPI.ParsePaymentsResults> cb) {
+        String query = "{\"event\":{\"$inQuery\":{\"where\":{\"fbId\":\"" + event.fbEventId + "\"},\"className\":\"Event\"}}}";
+        client().fetchEventPayments(query, cb);
+    }
+
+    public static void getEventsOfUser(User user, Callback<ParseAPI.ParseEventResults> cb) {
         String query = "{\"fbUserId\":" + "\"" + user.fbUserId + "\"}";
         client().fetchUserEvents(query, cb);
     }
