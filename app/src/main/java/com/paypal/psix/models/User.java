@@ -39,7 +39,7 @@ public class User extends Model {
         this.lastName = lastName;
     }
 
-    public String getAvatarURL() {
+    private Uri.Builder getAvatarUriBuilder() {
         Uri.Builder avatarUrlBuilder = new Uri.Builder();
         avatarUrlBuilder.scheme("https")
                 .authority("graph.facebook.com")
@@ -49,7 +49,11 @@ public class User extends Model {
                 .appendQueryParameter("height", "128")
                 .appendQueryParameter("width", "128")
                 .appendQueryParameter("redirect", "true");
-        return avatarUrlBuilder.toString();
+        return avatarUrlBuilder;
+    }
+
+    public String getAvatarURL() {
+        return getAvatarUriBuilder().toString();
     }
 
     public String getFullName() {
