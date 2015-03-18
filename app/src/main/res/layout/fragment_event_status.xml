@@ -77,9 +77,21 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/rsvp_list_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <ListView
+            android:id="@+id/rsvp_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 </LinearLayout>

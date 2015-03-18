@@ -49,7 +49,7 @@ public class EventStatusFragment extends Fragment {
         event = ((EventStatusActivity)getActivity()).event;
         eventTitle.setText(event.name);
         eventDateHeader.setText(event.getFormattedDate());
-        Picasso.with(getActivity()).load(event.imageURL).into(eventImageHeader);
+        Picasso.with(getActivity()).load(event.imageURL).resize(64,64).centerCrop().into(eventImageHeader);
         rsvpsAdapter = new RsvpsAdapter(getActivity(), new ArrayList<>(event.rsvps()));
         rsvpListView.setAdapter(rsvpsAdapter);
         updateMoneyCollection();
