@@ -67,8 +67,11 @@ public class EventsAdapter extends ArrayAdapter<Event> {
         holder.dateLabel.setText(event.getShortFormattedDate());
 
         String eventDescription = event.description;
-        if (event.description.length() > MAX_DESCRIPTION_LENGTH){
-            eventDescription = event.description.substring(0, MAX_DESCRIPTION_LENGTH - 3) + "...";
+        if (eventDescription == null) {
+            eventDescription = "";
+        }
+        if (eventDescription.length() > MAX_DESCRIPTION_LENGTH){
+            eventDescription = eventDescription.substring(0, MAX_DESCRIPTION_LENGTH - 3) + "...";
         }
 
         holder.descLabel.setText(eventDescription);
