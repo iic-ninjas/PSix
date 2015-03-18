@@ -2,7 +2,6 @@ package com.paypal.psix.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +9,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.activeandroid.query.Select;
 import com.paypal.psix.R;
 import com.paypal.psix.activities.EventStatusActivity;
 import com.paypal.psix.adapters.RsvpsAdapter;
 import com.paypal.psix.models.Event;
 import com.paypal.psix.models.Rsvp;
+import com.paypal.psix.models.User;
+import com.paypal.psix.services.ParseAPI;
+import com.paypal.psix.services.ParseEventsSyncService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,6 +25,8 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import retrofit.Callback;
+import retrofit.RetrofitError;
 
 public class EventStatusFragment extends Fragment {
 
@@ -52,7 +57,7 @@ public class EventStatusFragment extends Fragment {
         Picasso.with(getActivity()).load(event.imageURL).into(eventImageHeader);
         rsvpsAdapter = new RsvpsAdapter(getActivity(), new ArrayList<>(event.rsvps()));
         rsvpListView.setAdapter(rsvpsAdapter);
-        updateMoneyCollection();
+        syncPayments();
 
         return rootView;
     }
@@ -62,7 +67,36 @@ public class EventStatusFragment extends Fragment {
         ButterKnife.reset(this);
     }
 
-    private void updateMoneyCollection() {
+    private void syncPayments(){
+        // Fetch payments per event from Parse
+        ParseEventsSyncService.getPaymentsPerEvent(event, new Callback<ParseAPI.ParsePaymentsResults>() {
+
+            @Override
+            public void success(ParseAPI.ParsePaymentsResults results, retrofit.client.Response response) {
+                int sumAmount = 0;
+                for (ParseAPI.ParsePayment parsePayment : results.results) {
+                    sumAmount += parsePayment.amount;
+
+                    if (parsePayment.userFbId == null) break;
+                    User user =  new Select().from(User.class).where("FbUserId = ?", parsePayment.userFbId).executeSingle();
+                    if (user == null) break;
+                    Rsvp rsvp = new Select().from(Rsvp.class).where("User = ? AND Event = ?", user.getId(), event.getId()).executeSingle();
+                    if (rsvp == null) rsvp = new Rsvp(event, user);
+                    rsvp.amount = parsePayment.amount;
+                    rsvp.save();
+                }
+                updateMoneyCollection(sumAmount);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                updateMoneyCollection(0);
+            }
+        });
+
+    }
+
+    private void updateMoneyCollection(int amountFromParse) {
         perAttendeeAmount.setText(String.format("$%d", event.amountPerUser));
 
         List<Rsvp> attendees = event.getAttendingGuests();
@@ -76,7 +110,7 @@ public class EventStatusFragment extends Fragment {
             }
         }
 
-        moneyCollectedAmount.setText(String.format("$%d of $%d", collected, toCollect));
+        moneyCollectedAmount.setText(String.format("$%d of $%d", Math.max(collected, amountFromParse), toCollect));
         paidStatus.setText(String.format("%d of %d attending", totalAttendeesPaid, attendees.size()));
     }
 

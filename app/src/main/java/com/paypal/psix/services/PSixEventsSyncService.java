@@ -62,10 +62,10 @@ public class PSixEventsSyncService {
     }
 
     private static void syncEventsStatus(final EventsSyncCallback callbackHandler) {
-        ParseEventsSyncService.getEventsOfUser(UserSession.getUser(), new Callback<ParseAPI.ParseResults>() {
+        ParseEventsSyncService.getEventsOfUser(UserSession.getUser(), new Callback<ParseAPI.ParseEventResults>() {
 
             @Override
-            public void success(ParseAPI.ParseResults results, retrofit.client.Response response) {
+            public void success(ParseAPI.ParseEventResults results, retrofit.client.Response response) {
                 for (ParseAPI.ParseEvent parseEvent : results.results) {
                     Event event = new Select().from(Event.class).where("FbEventId = ?", parseEvent.fbId).executeSingle();
                     if (event != null) {
