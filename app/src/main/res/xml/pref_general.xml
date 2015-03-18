@@ -3,6 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.paypal.psix.fragments.LargeIconPreference
+        android:selectable="false"
+        android:key="@string/pref_user_name"
+        android:title="@string/placeholder_username"/>
+
     <EditTextPreference
         android:title="@string/pref_paypal_title"
         android:key="@string/pref_paypal_key"
