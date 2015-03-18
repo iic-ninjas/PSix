@@ -1,23 +1,38 @@
 package com.paypal.psix.activities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.paypal.psix.R;
+import com.paypal.psix.models.User;
 import com.paypal.psix.services.UserSession;
 import com.paypal.psix.utils.EmailValidator;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class SettingsActivity extends PreferenceActivity
         implements Preference.OnPreferenceChangeListener {
 
+    private static final String LOG_TAG = PreferenceActivity.class.getSimpleName();
+
     Preference paypalPref;
     Preference signOutPref;
+    Preference loggedInUserPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,6 +42,13 @@ public class SettingsActivity extends PreferenceActivity
         setupToolbar();
         setupPaypalAccount();
         setupSignOut();
+        setupUserIdentity();
+    }
+
+    private void setupUserIdentity() {
+        loggedInUserPref = findPreference(getString(R.string.pref_user_name));
+        loggedInUserPref.setTitle(UserSession.getUser().getFullName());
+        new UpdateUserProfilePic().execute();
     }
 
     private void setupToolbar() {
@@ -87,6 +109,34 @@ public class SettingsActivity extends PreferenceActivity
 
     private void fadeOutSettings() {
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+    private class UpdateUserProfilePic extends AsyncTask<Void, Void, Drawable> {
+
+        @Override
+        protected Drawable doInBackground(Void... params) {
+            try {
+                User loggedInUser = UserSession.getUser();
+                Bitmap x;
+                HttpURLConnection connection = (HttpURLConnection) new URL(loggedInUser.getAvatarURL()).openConnection();
+                connection.setRequestProperty("User-agent", "Mozilla/4.0");
+                connection.connect();
+                InputStream input = connection.getInputStream();
+
+                x = BitmapFactory.decodeStream(input);
+                return new BitmapDrawable(x);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Drawable drawable) {
+            loggedInUserPref.setIcon(drawable);
+        }
+
     }
 
 }
