@@ -77,9 +77,9 @@ public class EventStatusFragment extends Fragment {
                 for (ParseAPI.ParsePayment parsePayment : results.results) {
                     sumAmount += parsePayment.amount;
 
-                    if (parsePayment.userFbId == null) break;
+                    if (parsePayment.userFbId == null) continue;
                     User user =  new Select().from(User.class).where("FbUserId = ?", parsePayment.userFbId).executeSingle();
-                    if (user == null) break;
+                    if (user == null) continue;
                     Rsvp rsvp = new Select().from(Rsvp.class).where("User = ? AND Event = ?", user.getId(), event.getId()).executeSingle();
                     if (rsvp == null) rsvp = new Rsvp(event, user);
                     rsvp.amount = parsePayment.amount;
