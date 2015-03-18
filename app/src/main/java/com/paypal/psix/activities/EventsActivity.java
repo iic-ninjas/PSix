@@ -39,7 +39,7 @@ public class EventsActivity extends PSixActionBarActivity {
             return true;
         } else if (id == R.id.action_refresh) {
             EventsFragment events = (EventsFragment) getSupportFragmentManager().findFragmentById(R.id.event);
-            events.sync();
+            events.sync(true);
             return true;
         }
         return super.onOptionsItemSelected(item);

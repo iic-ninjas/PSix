@@ -104,11 +104,15 @@ public class EventsFragment extends Fragment implements PSixEventsSyncService.Ev
         });
     }
 
-    public void sync() {
-        if (data.isEmpty()) {
+    public void sync(boolean isUserInitiated) {
+        if (data.isEmpty() || isUserInitiated) {
             progress = ProgressDialog.show(getActivity(), getString(R.string.please_wait), getString(R.string.fetching_events));
         }
         PSixEventsSyncService.syncFacebookEvent(this);
+    }
+
+    public void sync() {
+        sync(false);
     }
 
     @Override
