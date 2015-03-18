@@ -63,7 +63,7 @@ public class SetupEventFragment extends Fragment {
         int count = event.getNumberOfInvitees();
         String quantityString = getResources().getQuantityString(R.plurals.you_invited, count, count);
         eventInviteesDesc.setText(quantityString);
-        Picasso.with(getActivity()).load(event.imageURL).into(eventImageHeader);
+        Picasso.with(getActivity()).load(event.imageURL).resize(128,128).centerCrop().into(eventImageHeader);
 
         return view;
     }

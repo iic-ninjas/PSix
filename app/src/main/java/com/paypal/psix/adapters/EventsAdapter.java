@@ -72,7 +72,7 @@ public class EventsAdapter extends ArrayAdapter<Event> {
         }
 
         holder.descLabel.setText(eventDescription);
-        Picasso.with(getContext()).load(event.imageURL).resize(64, 64).centerCrop().into(holder.imageView);
+        Picasso.with(getContext()).load(event.imageURL).resize(128,128).centerCrop().into(holder.imageView);
 
         int iconUnicode = event.hasSetup ? SETUPED_ICON_UNICODE : NOT_SETUPED_ICON_UNICODE;
         holder.actionIcon.setText(Character.toString((char)iconUnicode));
