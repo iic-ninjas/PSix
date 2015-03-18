@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,11 +104,15 @@ public class EventsFragment extends Fragment implements PSixEventsSyncService.Ev
         });
     }
 
-    private void sync() {
-        if (data.isEmpty()) {
+    public void sync(boolean isUserInitiated) {
+        if (data.isEmpty() || isUserInitiated) {
             progress = ProgressDialog.show(getActivity(), getString(R.string.please_wait), getString(R.string.fetching_events));
         }
         PSixEventsSyncService.syncFacebookEvent(this);
+    }
+
+    public void sync() {
+        sync(false);
     }
 
     @Override

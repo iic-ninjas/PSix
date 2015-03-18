@@ -1,5 +1,7 @@
 package com.paypal.psix.services;
 
+import android.util.Log;
+
 import com.activeandroid.query.Select;
 import com.facebook.Request;
 import com.facebook.RequestBatch;

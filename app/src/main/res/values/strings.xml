@@ -58,4 +58,5 @@
     <string name="label_empty_events">You have no future events</string>
     <string name="pref_user_name">user_name</string>
     <string name="placeholder_username">John Appleseed</string>
+    <string name="title_activity_refresh">Refresh</string>
 </resources>

@@ -24,7 +24,7 @@ import butterknife.InjectView;
 public class EventsAdapter extends ArrayAdapter<Event> {
 
     private static final String LOG_TAG = EventsAdapter.class.getSimpleName();
-    private static final int MAX_DESCRIPTION_LENGTH = 25;
+    private static final int MAX_DESCRIPTION_LENGTH = 19;
 
     private static final int SETUPED_ICON_UNICODE = 0xf251;
     private static final int NOT_SETUPED_ICON_UNICODE = 0xf2f7;
@@ -66,16 +66,13 @@ public class EventsAdapter extends ArrayAdapter<Event> {
         holder.titleLabel.setText(event.name);
         holder.dateLabel.setText(event.getShortFormattedDate());
 
-        String eventDescription = event.description;
-        if (eventDescription == null) {
-            eventDescription = "";
-        }
-        if (eventDescription.length() > MAX_DESCRIPTION_LENGTH){
+        String eventDescription = event.description == null ? "" : event.description;
+        if (eventDescription.length() > MAX_DESCRIPTION_LENGTH) {
             eventDescription = eventDescription.substring(0, MAX_DESCRIPTION_LENGTH - 3) + "...";
         }
 
         holder.descLabel.setText(eventDescription);
-        Picasso.with(getContext()).load(event.imageURL).into(holder.imageView);
+        Picasso.with(getContext()).load(event.imageURL).resize(64, 64).centerCrop().into(holder.imageView);
 
         int iconUnicode = event.hasSetup ? SETUPED_ICON_UNICODE : NOT_SETUPED_ICON_UNICODE;
         holder.actionIcon.setText(Character.toString((char)iconUnicode));
