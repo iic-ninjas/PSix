@@ -98,6 +98,7 @@ public class EventStatusFragment extends Fragment {
 
     private void updateMoneyCollection(int amountFromParse) {
         perAttendeeAmount.setText(String.format("$%d", event.amountPerUser));
+        rsvpsAdapter.notifyDataSetChanged();
 
         List<Rsvp> attendees = event.getAttendingGuests();
         int collected = 0;
